@@ -3,7 +3,7 @@
       <div
         v-if="actions.length > 0"
         :dusk="`${resource.id.value}-inline-actions`"
-        class="py-1"
+        class="py-1 flex gap-4"
         >
           <button
                 v-for="action in actions"
@@ -12,7 +12,7 @@
               @click="() => handleActionClick(action.uriKey)"
               :title="action.name"
               :destructive="action.destructive"
-              class="mx-2 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded text-sm font-bold focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 inline-flex items-center justify-center h-9 px-3 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900" >
+              class="shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded text-sm font-bold focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 inline-flex items-center justify-center h-9 px-3 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900" >
               {{ action.name }}
           </button>
       </div>
