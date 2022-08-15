@@ -7,7 +7,7 @@ This package allow you to change dropdown Nova action selectors to buttons at de
 
 ## How to install
 ```
-composer require lexicon/nova-action-button-selector
+composer require lexicon/nova-action-button-selectors
 ```
 
 ![example_1](./docs/main_1.jpg)
