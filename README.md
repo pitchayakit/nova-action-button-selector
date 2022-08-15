@@ -1,4 +1,5 @@
 ﻿# Laravel Nova action button selector
+This package allow you to change dropdown Nova action selectors to buttons
 
 ## How to install
 ```
