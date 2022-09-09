@@ -6,6 +6,14 @@
         "nova"
     ],
     "license": "MIT",
+    "homepage": "https://pitchayakit.github.io/cv",
+    "authors": [
+        {
+            "name": "Pitchayakit Pahamak",
+            "email": "pitchayakit.p@gmail.com",
+            "role": "Software Engineer"
+        }
+    ],
     "require": {
         "php": "^7.3|^8.0",
         "laravel/nova": "~4.0"
