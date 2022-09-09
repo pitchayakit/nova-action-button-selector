@@ -3,7 +3,7 @@
       <div
         v-if="actions.length > 0"
         :dusk="`${resource.id.value}-inline-actions`"
-        class="py-1 flex gap-4"
+        class="py-0 flex gap-4 mr-4"
         >
           <button
                 v-for="action in actions"
