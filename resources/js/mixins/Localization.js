@@ -1,6 +1,6 @@
 import forEach from 'lodash/forEach'
 
-export default {
+const mixin = {
   methods: {
     /**
      * Translate the given key.
@@ -43,4 +43,12 @@ export default {
       return translation
     },
   },
+}
+
+export default mixin
+
+export function useLocalization() {
+  return {
+    __: (key, replace) => mixin.methods.__(key, replace),
+  }
 }

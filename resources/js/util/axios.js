@@ -11,7 +11,7 @@ export function setupAxios() {
   instance.interceptors.response.use(
     response => response,
     error => {
-      if (error instanceof axios.Cancel) {
+      if (axios.isCancel(error)) {
         return Promise.reject(error)
       }
 

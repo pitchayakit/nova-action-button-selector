@@ -6,6 +6,12 @@ export default {
     filterIsActive: false,
   }),
 
+  watch: {
+    encodedFilters(value) {
+      Nova.$emit('filter-changed', [value])
+    },
+  },
+
   methods: {
     /**
      * Clear filters and reset the resource table
@@ -28,7 +34,6 @@ export default {
       })
 
       Nova.$emit('filter-reset')
-      Nova.$emit('filter-changed', [''])
     },
 
     /**
@@ -37,18 +42,14 @@ export default {
     filterChanged() {
       let filtersAreApplied =
         this.$store.getters[`${this.resourceName}/filtersAreApplied`]
-      let currentEncodedFilters =
-        this.$store.getters[`${this.resourceName}/currentEncodedFilters`]
 
       if (filtersAreApplied || this.filterIsActive) {
         this.filterIsActive = true
         this.updateQueryString({
           [this.pageParameter]: 1,
-          [this.filterParameter]: currentEncodedFilters,
+          [this.filterParameter]: this.encodedFilters,
         })
       }
-
-      Nova.$emit('filter-changed', [currentEncodedFilters])
     },
 
     /**
@@ -98,6 +99,10 @@ export default {
      */
     filterParameter() {
       return this.resourceName + '_filter'
+    },
+
+    encodedFilters() {
+      return this.$store.getters[`${this.resourceName}/currentEncodedFilters`]
     },
   },
 }

@@ -11,6 +11,9 @@ import { mapProps } from './propTypes'
 
 export default {
   extends: FormField,
+
+  emits: ['field-shown', 'field-hidden'],
+
   props: {
     ...mapProps([
       'shownViaNewRelationModal',
@@ -120,7 +123,7 @@ export default {
                 viaResourceId: this.viaResourceId,
                 viaRelationship: this.viaRelationship,
                 field: this.field.attribute,
-                component: this.field.component,
+                component: this.field.dependentComponentKey,
               },
               identity
             ),
@@ -130,7 +133,18 @@ export default {
           }
         )
         .then(response => {
+          let wasVisible = this.currentlyIsVisible
+
           this.syncedField = response.data
+
+          if (this.syncedField.visible !== wasVisible) {
+            this.$emit(
+              this.syncedField.visible === true
+                ? 'field-shown'
+                : 'field-hidden',
+              this.field.attribute
+            )
+          }
 
           if (isNil(this.syncedField.value)) {
             this.syncedField.value = this.field.value

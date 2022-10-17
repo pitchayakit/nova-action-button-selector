@@ -64,6 +64,12 @@ const propTypes = {
     default: 'view',
     validator: val => ['edit', 'select', 'ignore', 'detail'].includes(val),
   },
+
+  mode: {
+    type: String,
+    default: 'form',
+    validator: v => ['form', 'modal'].includes(v),
+  },
 }
 
 export function mapProps(attributes) {

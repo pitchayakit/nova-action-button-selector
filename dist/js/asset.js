@@ -7,7 +7,7 @@
   \*******************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-function e(e){return e&&"object"==typeof e&&"default"in e?e.default:e}var t=e(__webpack_require__(/*! axios */ "./node_modules/axios/index.js")),n=__webpack_require__(/*! qs */ "./node_modules/qs/lib/index.js"),i=e(__webpack_require__(/*! deepmerge */ "./node_modules/deepmerge/dist/cjs.js"));function r(){return(r=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var i in n)Object.prototype.hasOwnProperty.call(n,i)&&(e[i]=n[i])}return e}).apply(this,arguments)}var o,s={modal:null,listener:null,show:function(e){var t=this;"object"==typeof e&&(e="All Inertia requests must receive a valid Inertia response, however a plain JSON response was received.<hr>"+JSON.stringify(e));var n=document.createElement("html");n.innerHTML=e,n.querySelectorAll("a").forEach(function(e){return e.setAttribute("target","_top")}),this.modal=document.createElement("div"),this.modal.style.position="fixed",this.modal.style.width="100vw",this.modal.style.height="100vh",this.modal.style.padding="50px",this.modal.style.boxSizing="border-box",this.modal.style.backgroundColor="rgba(0, 0, 0, .6)",this.modal.style.zIndex=2e5,this.modal.addEventListener("click",function(){return t.hide()});var i=document.createElement("iframe");if(i.style.backgroundColor="white",i.style.borderRadius="5px",i.style.width="100%",i.style.height="100%",this.modal.appendChild(i),document.body.prepend(this.modal),document.body.style.overflow="hidden",!i.contentWindow)throw new Error("iframe not yet ready.");i.contentWindow.document.open(),i.contentWindow.document.write(n.outerHTML),i.contentWindow.document.close(),this.listener=this.hideOnEscape.bind(this),document.addEventListener("keydown",this.listener)},hide:function(){this.modal.outerHTML="",this.modal=null,document.body.style.overflow="visible",document.removeEventListener("keydown",this.listener)},hideOnEscape:function(e){27===e.keyCode&&this.hide()}};function a(e,t){var n;return function(){var i=arguments,r=this;clearTimeout(n),n=setTimeout(function(){return e.apply(r,[].slice.call(i))},t)}}function c(e,t,n){for(var i in void 0===t&&(t=new FormData),void 0===n&&(n=null),e=e||{})Object.prototype.hasOwnProperty.call(e,i)&&d(t,l(n,i),e[i]);return t}function l(e,t){return e?e+"["+t+"]":t}function d(e,t,n){return Array.isArray(n)?Array.from(n.keys()).forEach(function(i){return d(e,l(t,i.toString()),n[i])}):n instanceof Date?e.append(t,n.toISOString()):n instanceof File?e.append(t,n,n.name):n instanceof Blob?e.append(t,n):"boolean"==typeof n?e.append(t,n?"1":"0"):"string"==typeof n?e.append(t,n):"number"==typeof n?e.append(t,""+n):null==n?e.append(t,""):void c(n,e,t)}function u(e){return new URL(e.toString(),window.location.toString())}function h(e,t,r,o){void 0===o&&(o="brackets");var s=/^https?:\/\//.test(t.toString()),a=s||t.toString().startsWith("/"),c=!a&&!t.toString().startsWith("#")&&!t.toString().startsWith("?"),l=t.toString().includes("?")||e===exports.Method.GET&&Object.keys(r).length,d=t.toString().includes("#"),u=new URL(t.toString(),"http://localhost");return e===exports.Method.GET&&Object.keys(r).length&&(u.search=n.stringify(i(n.parse(u.search,{ignoreQueryPrefix:!0}),r),{encodeValuesOnly:!0,arrayFormat:o}),r={}),[[s?u.protocol+"//"+u.host:"",a?u.pathname:"",c?u.pathname.substring(1):"",l?u.search:"",d?u.hash:""].join(""),r]}function p(e){return(e=new URL(e.href)).hash="",e}function f(e,t){return document.dispatchEvent(new CustomEvent("inertia:"+e,t))}(o=exports.Method||(exports.Method={})).GET="get",o.POST="post",o.PUT="put",o.PATCH="patch",o.DELETE="delete";var v=function(e){return f("finish",{detail:{visit:e}})},m=function(e){return f("navigate",{detail:{page:e}})},g="undefined"==typeof window,w=function(){function e(){this.visitId=null}var n=e.prototype;return n.init=function(e){var t=e.resolveComponent,n=e.swapComponent;this.page=e.initialPage,this.resolveComponent=t,this.swapComponent=n,this.isBackForwardVisit()?this.handleBackForwardVisit(this.page):this.isLocationVisit()?this.handleLocationVisit(this.page):this.handleInitialPageVisit(this.page),this.setupEventListeners()},n.handleInitialPageVisit=function(e){this.page.url+=window.location.hash,this.setPage(e,{preserveState:!0}).then(function(){return m(e)})},n.setupEventListeners=function(){window.addEventListener("popstate",this.handlePopstateEvent.bind(this)),document.addEventListener("scroll",a(this.handleScrollEvent.bind(this),100),!0)},n.scrollRegions=function(){return document.querySelectorAll("[scroll-region]")},n.handleScrollEvent=function(e){"function"==typeof e.target.hasAttribute&&e.target.hasAttribute("scroll-region")&&this.saveScrollPositions()},n.saveScrollPositions=function(){this.replaceState(r({},this.page,{scrollRegions:Array.from(this.scrollRegions()).map(function(e){return{top:e.scrollTop,left:e.scrollLeft}})}))},n.resetScrollPositions=function(){var e;document.documentElement.scrollTop=0,document.documentElement.scrollLeft=0,this.scrollRegions().forEach(function(e){e.scrollTop=0,e.scrollLeft=0}),this.saveScrollPositions(),window.location.hash&&(null==(e=document.getElementById(window.location.hash.slice(1)))||e.scrollIntoView())},n.restoreScrollPositions=function(){var e=this;this.page.scrollRegions&&this.scrollRegions().forEach(function(t,n){var i=e.page.scrollRegions[n];i&&(t.scrollTop=i.top,t.scrollLeft=i.left)})},n.isBackForwardVisit=function(){return window.history.state&&window.performance&&window.performance.getEntriesByType("navigation").length>0&&"back_forward"===window.performance.getEntriesByType("navigation")[0].type},n.handleBackForwardVisit=function(e){var t=this;window.history.state.version=e.version,this.setPage(window.history.state,{preserveScroll:!0,preserveState:!0}).then(function(){t.restoreScrollPositions(),m(e)})},n.locationVisit=function(e,t){try{window.sessionStorage.setItem("inertiaLocationVisit",JSON.stringify({preserveScroll:t})),window.location.href=e.href,p(window.location).href===p(e).href&&window.location.reload()}catch(e){return!1}},n.isLocationVisit=function(){try{return null!==window.sessionStorage.getItem("inertiaLocationVisit")}catch(e){return!1}},n.handleLocationVisit=function(e){var t,n,i,r,o=this,s=JSON.parse(window.sessionStorage.getItem("inertiaLocationVisit")||"");window.sessionStorage.removeItem("inertiaLocationVisit"),e.url+=window.location.hash,e.rememberedState=null!=(t=null==(n=window.history.state)?void 0:n.rememberedState)?t:{},e.scrollRegions=null!=(i=null==(r=window.history.state)?void 0:r.scrollRegions)?i:[],this.setPage(e,{preserveScroll:s.preserveScroll,preserveState:!0}).then(function(){s.preserveScroll&&o.restoreScrollPositions(),m(e)})},n.isLocationVisitResponse=function(e){return e&&409===e.status&&e.headers["x-inertia-location"]},n.isInertiaResponse=function(e){return null==e?void 0:e.headers["x-inertia"]},n.createVisitId=function(){return this.visitId={},this.visitId},n.cancelVisit=function(e,t){var n=t.cancelled,i=void 0!==n&&n,r=t.interrupted,o=void 0!==r&&r;!e||e.completed||e.cancelled||e.interrupted||(e.cancelToken.cancel(),e.onCancel(),e.completed=!1,e.cancelled=i,e.interrupted=o,v(e),e.onFinish(e))},n.finishVisit=function(e){e.cancelled||e.interrupted||(e.completed=!0,e.cancelled=!1,e.interrupted=!1,v(e),e.onFinish(e))},n.resolvePreserveOption=function(e,t){return"function"==typeof e?e(t):"errors"===e?Object.keys(t.props.errors||{}).length>0:e},n.visit=function(e,n){var i=this,o=void 0===n?{}:n,a=o.method,l=void 0===a?exports.Method.GET:a,d=o.data,v=void 0===d?{}:d,m=o.replace,g=void 0!==m&&m,w=o.preserveScroll,y=void 0!==w&&w,S=o.preserveState,b=void 0!==S&&S,E=o.only,P=void 0===E?[]:E,I=o.headers,x=void 0===I?{}:I,V=o.errorBag,T=void 0===V?"":V,L=o.forceFormData,O=void 0!==L&&L,k=o.onCancelToken,C=void 0===k?function(){}:k,M=o.onBefore,A=void 0===M?function(){}:M,F=o.onStart,R=void 0===F?function(){}:F,j=o.onProgress,D=void 0===j?function(){}:j,B=o.onFinish,q=void 0===B?function(){}:B,N=o.onCancel,H=void 0===N?function(){}:N,W=o.onSuccess,G=void 0===W?function(){}:W,U=o.onError,X=void 0===U?function(){}:U,J=o.queryStringArrayFormat,K=void 0===J?"brackets":J,_="string"==typeof e?u(e):e;if(!function e(t){return t instanceof File||t instanceof Blob||t instanceof FileList&&t.length>0||t instanceof FormData&&Array.from(t.values()).some(function(t){return e(t)})||"object"==typeof t&&null!==t&&Object.values(t).some(function(t){return e(t)})}(v)&&!O||v instanceof FormData||(v=c(v)),!(v instanceof FormData)){var z=h(l,_,v,K),Q=z[1];_=u(z[0]),v=Q}var Y={url:_,method:l,data:v,replace:g,preserveScroll:y,preserveState:b,only:P,headers:x,errorBag:T,forceFormData:O,queryStringArrayFormat:K,cancelled:!1,completed:!1,interrupted:!1};if(!1!==A(Y)&&function(e){return f("before",{cancelable:!0,detail:{visit:e}})}(Y)){this.activeVisit&&this.cancelVisit(this.activeVisit,{interrupted:!0}),this.saveScrollPositions();var Z=this.createVisitId();this.activeVisit=r({},Y,{onCancelToken:C,onBefore:A,onStart:R,onProgress:D,onFinish:q,onCancel:H,onSuccess:G,onError:X,queryStringArrayFormat:K,cancelToken:t.CancelToken.source()}),C({cancel:function(){i.activeVisit&&i.cancelVisit(i.activeVisit,{cancelled:!0})}}),function(e){f("start",{detail:{visit:e}})}(Y),R(Y),t({method:l,url:p(_).href,data:l===exports.Method.GET?{}:v,params:l===exports.Method.GET?v:{},cancelToken:this.activeVisit.cancelToken.token,headers:r({},x,{Accept:"text/html, application/xhtml+xml","X-Requested-With":"XMLHttpRequest","X-Inertia":!0},P.length?{"X-Inertia-Partial-Component":this.page.component,"X-Inertia-Partial-Data":P.join(",")}:{},T&&T.length?{"X-Inertia-Error-Bag":T}:{},this.page.version?{"X-Inertia-Version":this.page.version}:{}),onUploadProgress:function(e){v instanceof FormData&&(e.percentage=Math.round(e.loaded/e.total*100),function(e){f("progress",{detail:{progress:e}})}(e),D(e))}}).then(function(e){var t;if(!i.isInertiaResponse(e))return Promise.reject({response:e});var n=e.data;P.length&&n.component===i.page.component&&(n.props=r({},i.page.props,n.props)),y=i.resolvePreserveOption(y,n),(b=i.resolvePreserveOption(b,n))&&null!=(t=window.history.state)&&t.rememberedState&&n.component===i.page.component&&(n.rememberedState=window.history.state.rememberedState);var o=_,s=u(n.url);return o.hash&&!s.hash&&p(o).href===s.href&&(s.hash=o.hash,n.url=s.href),i.setPage(n,{visitId:Z,replace:g,preserveScroll:y,preserveState:b})}).then(function(){var e=i.page.props.errors||{};if(Object.keys(e).length>0){var t=T?e[T]?e[T]:{}:e;return function(e){f("error",{detail:{errors:e}})}(t),X(t)}return f("success",{detail:{page:i.page}}),G(i.page)}).catch(function(e){if(i.isInertiaResponse(e.response))return i.setPage(e.response.data,{visitId:Z});if(i.isLocationVisitResponse(e.response)){var t=u(e.response.headers["x-inertia-location"]),n=_;n.hash&&!t.hash&&p(n).href===t.href&&(t.hash=n.hash),i.locationVisit(t,!0===y)}else{if(!e.response)return Promise.reject(e);f("invalid",{cancelable:!0,detail:{response:e.response}})&&s.show(e.response.data)}}).then(function(){i.activeVisit&&i.finishVisit(i.activeVisit)}).catch(function(e){if(!t.isCancel(e)){var n=f("exception",{cancelable:!0,detail:{exception:e}});if(i.activeVisit&&i.finishVisit(i.activeVisit),n)return Promise.reject(e)}})}},n.setPage=function(e,t){var n=this,i=void 0===t?{}:t,r=i.visitId,o=void 0===r?this.createVisitId():r,s=i.replace,a=void 0!==s&&s,c=i.preserveScroll,l=void 0!==c&&c,d=i.preserveState,h=void 0!==d&&d;return Promise.resolve(this.resolveComponent(e.component)).then(function(t){o===n.visitId&&(e.scrollRegions=e.scrollRegions||[],e.rememberedState=e.rememberedState||{},(a=a||u(e.url).href===window.location.href)?n.replaceState(e):n.pushState(e),n.swapComponent({component:t,page:e,preserveState:h}).then(function(){l||n.resetScrollPositions(),a||m(e)}))})},n.pushState=function(e){this.page=e,window.history.pushState(e,"",e.url)},n.replaceState=function(e){this.page=e,window.history.replaceState(e,"",e.url)},n.handlePopstateEvent=function(e){var t=this;if(null!==e.state){var n=e.state,i=this.createVisitId();Promise.resolve(this.resolveComponent(n.component)).then(function(e){i===t.visitId&&(t.page=n,t.swapComponent({component:e,page:n,preserveState:!1}).then(function(){t.restoreScrollPositions(),m(n)}))})}else{var o=u(this.page.url);o.hash=window.location.hash,this.replaceState(r({},this.page,{url:o.href})),this.resetScrollPositions()}},n.get=function(e,t,n){return void 0===t&&(t={}),void 0===n&&(n={}),this.visit(e,r({},n,{method:exports.Method.GET,data:t}))},n.reload=function(e){return void 0===e&&(e={}),this.visit(window.location.href,r({},e,{preserveScroll:!0,preserveState:!0}))},n.replace=function(e,t){var n;return void 0===t&&(t={}),console.warn("Inertia.replace() has been deprecated and will be removed in a future release. Please use Inertia."+(null!=(n=t.method)?n:"get")+"() instead."),this.visit(e,r({preserveState:!0},t,{replace:!0}))},n.post=function(e,t,n){return void 0===t&&(t={}),void 0===n&&(n={}),this.visit(e,r({preserveState:!0},n,{method:exports.Method.POST,data:t}))},n.put=function(e,t,n){return void 0===t&&(t={}),void 0===n&&(n={}),this.visit(e,r({preserveState:!0},n,{method:exports.Method.PUT,data:t}))},n.patch=function(e,t,n){return void 0===t&&(t={}),void 0===n&&(n={}),this.visit(e,r({preserveState:!0},n,{method:exports.Method.PATCH,data:t}))},n.delete=function(e,t){return void 0===t&&(t={}),this.visit(e,r({preserveState:!0},t,{method:exports.Method.DELETE}))},n.remember=function(e,t){var n,i;void 0===t&&(t="default"),g||this.replaceState(r({},this.page,{rememberedState:r({},null==(n=this.page)?void 0:n.rememberedState,(i={},i[t]=e,i))}))},n.restore=function(e){var t,n;if(void 0===e&&(e="default"),!g)return null==(t=window.history.state)||null==(n=t.rememberedState)?void 0:n[e]},n.on=function(e,t){var n=function(e){var n=t(e);e.cancelable&&!e.defaultPrevented&&!1===n&&e.preventDefault()};return document.addEventListener("inertia:"+e,n),function(){return document.removeEventListener("inertia:"+e,n)}},e}(),y={buildDOMElement:function(e){var t=document.createElement("template");t.innerHTML=e;var n=t.content.firstChild;if(!e.startsWith("<script "))return n;var i=document.createElement("script");return i.innerHTML=n.innerHTML,n.getAttributeNames().forEach(function(e){i.setAttribute(e,n.getAttribute(e)||"")}),i},isInertiaManagedElement:function(e){return e.nodeType===Node.ELEMENT_NODE&&null!==e.getAttribute("inertia")},findMatchingElementIndex:function(e,t){var n=e.getAttribute("inertia");return null!==n?t.findIndex(function(e){return e.getAttribute("inertia")===n}):-1},update:a(function(e){var t=this,n=e.map(function(e){return t.buildDOMElement(e)});Array.from(document.head.childNodes).filter(function(e){return t.isInertiaManagedElement(e)}).forEach(function(e){var i=t.findMatchingElementIndex(e,n);if(-1!==i){var r,o=n.splice(i,1)[0];o&&!e.isEqualNode(o)&&(null==e||null==(r=e.parentNode)||r.replaceChild(o,e))}else{var s;null==e||null==(s=e.parentNode)||s.removeChild(e)}}),n.forEach(function(e){return document.head.appendChild(e)})},1)},S=new w;exports.Inertia=S,exports.createHeadManager=function(e,t,n){var i={},r=0;function o(){var e=Object.values(i).reduce(function(e,t){return e.concat(t)},[]).reduce(function(e,n){if(-1===n.indexOf("<"))return e;if(0===n.indexOf("<title ")){var i=n.match(/(<title [^>]+>)(.*?)(<\/title>)/);return e.title=i?""+i[1]+t(i[2])+i[3]:n,e}var r=n.match(/ inertia="[^"]+"/);return r?e[r[0]]=n:e[Object.keys(e).length]=n,e},{});return Object.values(e)}function s(){e?n(o()):y.update(o())}return{createProvider:function(){var e=function(){var e=r+=1;return i[e]=[],e.toString()}();return{update:function(t){return function(e,t){void 0===t&&(t=[]),null!==e&&Object.keys(i).indexOf(e)>-1&&(i[e]=t),s()}(e,t)},disconnect:function(){return function(e){null!==e&&-1!==Object.keys(i).indexOf(e)&&(delete i[e],s())}(e)}}}}},exports.hrefToUrl=u,exports.mergeDataIntoQueryString=h,exports.shouldIntercept=function(e){var t="a"===e.currentTarget.tagName.toLowerCase();return!(e.target&&null!=e&&e.target.isContentEditable||e.defaultPrevented||t&&e.which>1||t&&e.altKey||t&&e.ctrlKey||t&&e.metaKey||t&&e.shiftKey)},exports.urlWithoutHash=p;
+function e(e){return e&&"object"==typeof e&&"default"in e?e.default:e}var t=e(__webpack_require__(/*! axios */ "./node_modules/axios/index.js")),n=__webpack_require__(/*! qs */ "./node_modules/qs/lib/index.js"),i=e(__webpack_require__(/*! deepmerge */ "./node_modules/deepmerge/dist/cjs.js"));function r(){return(r=Object.assign?Object.assign.bind():function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var i in n)Object.prototype.hasOwnProperty.call(n,i)&&(e[i]=n[i])}return e}).apply(this,arguments)}var o,s={modal:null,listener:null,show:function(e){var t=this;"object"==typeof e&&(e="All Inertia requests must receive a valid Inertia response, however a plain JSON response was received.<hr>"+JSON.stringify(e));var n=document.createElement("html");n.innerHTML=e,n.querySelectorAll("a").forEach(function(e){return e.setAttribute("target","_top")}),this.modal=document.createElement("div"),this.modal.style.position="fixed",this.modal.style.width="100vw",this.modal.style.height="100vh",this.modal.style.padding="50px",this.modal.style.boxSizing="border-box",this.modal.style.backgroundColor="rgba(0, 0, 0, .6)",this.modal.style.zIndex=2e5,this.modal.addEventListener("click",function(){return t.hide()});var i=document.createElement("iframe");if(i.style.backgroundColor="white",i.style.borderRadius="5px",i.style.width="100%",i.style.height="100%",this.modal.appendChild(i),document.body.prepend(this.modal),document.body.style.overflow="hidden",!i.contentWindow)throw new Error("iframe not yet ready.");i.contentWindow.document.open(),i.contentWindow.document.write(n.outerHTML),i.contentWindow.document.close(),this.listener=this.hideOnEscape.bind(this),document.addEventListener("keydown",this.listener)},hide:function(){this.modal.outerHTML="",this.modal=null,document.body.style.overflow="visible",document.removeEventListener("keydown",this.listener)},hideOnEscape:function(e){27===e.keyCode&&this.hide()}};function a(e,t){var n;return function(){var i=arguments,r=this;clearTimeout(n),n=setTimeout(function(){return e.apply(r,[].slice.call(i))},t)}}function c(e,t,n){for(var i in void 0===t&&(t=new FormData),void 0===n&&(n=null),e=e||{})Object.prototype.hasOwnProperty.call(e,i)&&d(t,l(n,i),e[i]);return t}function l(e,t){return e?e+"["+t+"]":t}function d(e,t,n){return Array.isArray(n)?Array.from(n.keys()).forEach(function(i){return d(e,l(t,i.toString()),n[i])}):n instanceof Date?e.append(t,n.toISOString()):n instanceof File?e.append(t,n,n.name):n instanceof Blob?e.append(t,n):"boolean"==typeof n?e.append(t,n?"1":"0"):"string"==typeof n?e.append(t,n):"number"==typeof n?e.append(t,""+n):null==n?e.append(t,""):void c(n,e,t)}function u(e){return new URL(e.toString(),window.location.toString())}function h(e,t,r,o){void 0===o&&(o="brackets");var s=/^https?:\/\//.test(t.toString()),a=s||t.toString().startsWith("/"),c=!a&&!t.toString().startsWith("#")&&!t.toString().startsWith("?"),l=t.toString().includes("?")||e===exports.Method.GET&&Object.keys(r).length,d=t.toString().includes("#"),u=new URL(t.toString(),"http://localhost");return e===exports.Method.GET&&Object.keys(r).length&&(u.search=n.stringify(i(n.parse(u.search,{ignoreQueryPrefix:!0}),r),{encodeValuesOnly:!0,arrayFormat:o}),r={}),[[s?u.protocol+"//"+u.host:"",a?u.pathname:"",c?u.pathname.substring(1):"",l?u.search:"",d?u.hash:""].join(""),r]}function p(e){return(e=new URL(e.href)).hash="",e}function f(e,t){return document.dispatchEvent(new CustomEvent("inertia:"+e,t))}(o=exports.Method||(exports.Method={})).GET="get",o.POST="post",o.PUT="put",o.PATCH="patch",o.DELETE="delete";var v=function(e){return f("finish",{detail:{visit:e}})},m=function(e){return f("navigate",{detail:{page:e}})},g="undefined"==typeof window,w=function(){function e(){this.visitId=null}var n=e.prototype;return n.init=function(e){var t=e.resolveComponent,n=e.swapComponent;this.page=e.initialPage,this.resolveComponent=t,this.swapComponent=n,this.isBackForwardVisit()?this.handleBackForwardVisit(this.page):this.isLocationVisit()?this.handleLocationVisit(this.page):this.handleInitialPageVisit(this.page),this.setupEventListeners()},n.handleInitialPageVisit=function(e){this.page.url+=window.location.hash,this.setPage(e,{preserveState:!0}).then(function(){return m(e)})},n.setupEventListeners=function(){window.addEventListener("popstate",this.handlePopstateEvent.bind(this)),document.addEventListener("scroll",a(this.handleScrollEvent.bind(this),100),!0)},n.scrollRegions=function(){return document.querySelectorAll("[scroll-region]")},n.handleScrollEvent=function(e){"function"==typeof e.target.hasAttribute&&e.target.hasAttribute("scroll-region")&&this.saveScrollPositions()},n.saveScrollPositions=function(){this.replaceState(r({},this.page,{scrollRegions:Array.from(this.scrollRegions()).map(function(e){return{top:e.scrollTop,left:e.scrollLeft}})}))},n.resetScrollPositions=function(){var e;window.scrollTo(0,0),this.scrollRegions().forEach(function(e){"function"==typeof e.scrollTo?e.scrollTo(0,0):(e.scrollTop=0,e.scrollLeft=0)}),this.saveScrollPositions(),window.location.hash&&(null==(e=document.getElementById(window.location.hash.slice(1)))||e.scrollIntoView())},n.restoreScrollPositions=function(){var e=this;this.page.scrollRegions&&this.scrollRegions().forEach(function(t,n){var i=e.page.scrollRegions[n];i&&("function"==typeof t.scrollTo?t.scrollTo(i.left,i.top):(t.scrollTop=i.top,t.scrollLeft=i.left))})},n.isBackForwardVisit=function(){return window.history.state&&window.performance&&window.performance.getEntriesByType("navigation").length>0&&"back_forward"===window.performance.getEntriesByType("navigation")[0].type},n.handleBackForwardVisit=function(e){var t=this;window.history.state.version=e.version,this.setPage(window.history.state,{preserveScroll:!0,preserveState:!0}).then(function(){t.restoreScrollPositions(),m(e)})},n.locationVisit=function(e,t){try{window.sessionStorage.setItem("inertiaLocationVisit",JSON.stringify({preserveScroll:t})),window.location.href=e.href,p(window.location).href===p(e).href&&window.location.reload()}catch(e){return!1}},n.isLocationVisit=function(){try{return null!==window.sessionStorage.getItem("inertiaLocationVisit")}catch(e){return!1}},n.handleLocationVisit=function(e){var t,n,i,r,o=this,s=JSON.parse(window.sessionStorage.getItem("inertiaLocationVisit")||"");window.sessionStorage.removeItem("inertiaLocationVisit"),e.url+=window.location.hash,e.rememberedState=null!=(t=null==(n=window.history.state)?void 0:n.rememberedState)?t:{},e.scrollRegions=null!=(i=null==(r=window.history.state)?void 0:r.scrollRegions)?i:[],this.setPage(e,{preserveScroll:s.preserveScroll,preserveState:!0}).then(function(){s.preserveScroll&&o.restoreScrollPositions(),m(e)})},n.isLocationVisitResponse=function(e){return e&&409===e.status&&e.headers["x-inertia-location"]},n.isInertiaResponse=function(e){return null==e?void 0:e.headers["x-inertia"]},n.createVisitId=function(){return this.visitId={},this.visitId},n.cancelVisit=function(e,t){var n=t.cancelled,i=void 0!==n&&n,r=t.interrupted,o=void 0!==r&&r;!e||e.completed||e.cancelled||e.interrupted||(e.cancelToken.cancel(),e.onCancel(),e.completed=!1,e.cancelled=i,e.interrupted=o,v(e),e.onFinish(e))},n.finishVisit=function(e){e.cancelled||e.interrupted||(e.completed=!0,e.cancelled=!1,e.interrupted=!1,v(e),e.onFinish(e))},n.resolvePreserveOption=function(e,t){return"function"==typeof e?e(t):"errors"===e?Object.keys(t.props.errors||{}).length>0:e},n.visit=function(e,n){var i=this,o=void 0===n?{}:n,a=o.method,l=void 0===a?exports.Method.GET:a,d=o.data,v=void 0===d?{}:d,m=o.replace,g=void 0!==m&&m,w=o.preserveScroll,y=void 0!==w&&w,S=o.preserveState,b=void 0!==S&&S,E=o.only,P=void 0===E?[]:E,T=o.headers,I=void 0===T?{}:T,x=o.errorBag,V=void 0===x?"":x,L=o.forceFormData,O=void 0!==L&&L,k=o.onCancelToken,C=void 0===k?function(){}:k,M=o.onBefore,A=void 0===M?function(){}:M,j=o.onStart,F=void 0===j?function(){}:j,R=o.onProgress,D=void 0===R?function(){}:R,B=o.onFinish,q=void 0===B?function(){}:B,N=o.onCancel,H=void 0===N?function(){}:N,W=o.onSuccess,G=void 0===W?function(){}:W,U=o.onError,X=void 0===U?function(){}:U,J=o.queryStringArrayFormat,K=void 0===J?"brackets":J,_="string"==typeof e?u(e):e;if(!function e(t){return t instanceof File||t instanceof Blob||t instanceof FileList&&t.length>0||t instanceof FormData&&Array.from(t.values()).some(function(t){return e(t)})||"object"==typeof t&&null!==t&&Object.values(t).some(function(t){return e(t)})}(v)&&!O||v instanceof FormData||(v=c(v)),!(v instanceof FormData)){var z=h(l,_,v,K),Q=z[1];_=u(z[0]),v=Q}var Y={url:_,method:l,data:v,replace:g,preserveScroll:y,preserveState:b,only:P,headers:I,errorBag:V,forceFormData:O,queryStringArrayFormat:K,cancelled:!1,completed:!1,interrupted:!1};if(!1!==A(Y)&&function(e){return f("before",{cancelable:!0,detail:{visit:e}})}(Y)){this.activeVisit&&this.cancelVisit(this.activeVisit,{interrupted:!0}),this.saveScrollPositions();var Z=this.createVisitId();this.activeVisit=r({},Y,{onCancelToken:C,onBefore:A,onStart:F,onProgress:D,onFinish:q,onCancel:H,onSuccess:G,onError:X,queryStringArrayFormat:K,cancelToken:t.CancelToken.source()}),C({cancel:function(){i.activeVisit&&i.cancelVisit(i.activeVisit,{cancelled:!0})}}),function(e){f("start",{detail:{visit:e}})}(Y),F(Y),t({method:l,url:p(_).href,data:l===exports.Method.GET?{}:v,params:l===exports.Method.GET?v:{},cancelToken:this.activeVisit.cancelToken.token,headers:r({},I,{Accept:"text/html, application/xhtml+xml","X-Requested-With":"XMLHttpRequest","X-Inertia":!0},P.length?{"X-Inertia-Partial-Component":this.page.component,"X-Inertia-Partial-Data":P.join(",")}:{},V&&V.length?{"X-Inertia-Error-Bag":V}:{},this.page.version?{"X-Inertia-Version":this.page.version}:{}),onUploadProgress:function(e){v instanceof FormData&&(e.percentage=Math.round(e.loaded/e.total*100),function(e){f("progress",{detail:{progress:e}})}(e),D(e))}}).then(function(e){var t;if(!i.isInertiaResponse(e))return Promise.reject({response:e});var n=e.data;P.length&&n.component===i.page.component&&(n.props=r({},i.page.props,n.props)),y=i.resolvePreserveOption(y,n),(b=i.resolvePreserveOption(b,n))&&null!=(t=window.history.state)&&t.rememberedState&&n.component===i.page.component&&(n.rememberedState=window.history.state.rememberedState);var o=_,s=u(n.url);return o.hash&&!s.hash&&p(o).href===s.href&&(s.hash=o.hash,n.url=s.href),i.setPage(n,{visitId:Z,replace:g,preserveScroll:y,preserveState:b})}).then(function(){var e=i.page.props.errors||{};if(Object.keys(e).length>0){var t=V?e[V]?e[V]:{}:e;return function(e){f("error",{detail:{errors:e}})}(t),X(t)}return f("success",{detail:{page:i.page}}),G(i.page)}).catch(function(e){if(i.isInertiaResponse(e.response))return i.setPage(e.response.data,{visitId:Z});if(i.isLocationVisitResponse(e.response)){var t=u(e.response.headers["x-inertia-location"]),n=_;n.hash&&!t.hash&&p(n).href===t.href&&(t.hash=n.hash),i.locationVisit(t,!0===y)}else{if(!e.response)return Promise.reject(e);f("invalid",{cancelable:!0,detail:{response:e.response}})&&s.show(e.response.data)}}).then(function(){i.activeVisit&&i.finishVisit(i.activeVisit)}).catch(function(e){if(!t.isCancel(e)){var n=f("exception",{cancelable:!0,detail:{exception:e}});if(i.activeVisit&&i.finishVisit(i.activeVisit),n)return Promise.reject(e)}})}},n.setPage=function(e,t){var n=this,i=void 0===t?{}:t,r=i.visitId,o=void 0===r?this.createVisitId():r,s=i.replace,a=void 0!==s&&s,c=i.preserveScroll,l=void 0!==c&&c,d=i.preserveState,h=void 0!==d&&d;return Promise.resolve(this.resolveComponent(e.component)).then(function(t){o===n.visitId&&(e.scrollRegions=e.scrollRegions||[],e.rememberedState=e.rememberedState||{},(a=a||u(e.url).href===window.location.href)?n.replaceState(e):n.pushState(e),n.swapComponent({component:t,page:e,preserveState:h}).then(function(){l||n.resetScrollPositions(),a||m(e)}))})},n.pushState=function(e){this.page=e,window.history.pushState(e,"",e.url)},n.replaceState=function(e){this.page=e,window.history.replaceState(e,"",e.url)},n.handlePopstateEvent=function(e){var t=this;if(null!==e.state){var n=e.state,i=this.createVisitId();Promise.resolve(this.resolveComponent(n.component)).then(function(e){i===t.visitId&&(t.page=n,t.swapComponent({component:e,page:n,preserveState:!1}).then(function(){t.restoreScrollPositions(),m(n)}))})}else{var o=u(this.page.url);o.hash=window.location.hash,this.replaceState(r({},this.page,{url:o.href})),this.resetScrollPositions()}},n.get=function(e,t,n){return void 0===t&&(t={}),void 0===n&&(n={}),this.visit(e,r({},n,{method:exports.Method.GET,data:t}))},n.reload=function(e){return void 0===e&&(e={}),this.visit(window.location.href,r({},e,{preserveScroll:!0,preserveState:!0}))},n.replace=function(e,t){var n;return void 0===t&&(t={}),console.warn("Inertia.replace() has been deprecated and will be removed in a future release. Please use Inertia."+(null!=(n=t.method)?n:"get")+"() instead."),this.visit(e,r({preserveState:!0},t,{replace:!0}))},n.post=function(e,t,n){return void 0===t&&(t={}),void 0===n&&(n={}),this.visit(e,r({preserveState:!0},n,{method:exports.Method.POST,data:t}))},n.put=function(e,t,n){return void 0===t&&(t={}),void 0===n&&(n={}),this.visit(e,r({preserveState:!0},n,{method:exports.Method.PUT,data:t}))},n.patch=function(e,t,n){return void 0===t&&(t={}),void 0===n&&(n={}),this.visit(e,r({preserveState:!0},n,{method:exports.Method.PATCH,data:t}))},n.delete=function(e,t){return void 0===t&&(t={}),this.visit(e,r({preserveState:!0},t,{method:exports.Method.DELETE}))},n.remember=function(e,t){var n,i;void 0===t&&(t="default"),g||this.replaceState(r({},this.page,{rememberedState:r({},null==(n=this.page)?void 0:n.rememberedState,(i={},i[t]=e,i))}))},n.restore=function(e){var t,n;if(void 0===e&&(e="default"),!g)return null==(t=window.history.state)||null==(n=t.rememberedState)?void 0:n[e]},n.on=function(e,t){var n=function(e){var n=t(e);e.cancelable&&!e.defaultPrevented&&!1===n&&e.preventDefault()};return document.addEventListener("inertia:"+e,n),function(){return document.removeEventListener("inertia:"+e,n)}},e}(),y={buildDOMElement:function(e){var t=document.createElement("template");t.innerHTML=e;var n=t.content.firstChild;if(!e.startsWith("<script "))return n;var i=document.createElement("script");return i.innerHTML=n.innerHTML,n.getAttributeNames().forEach(function(e){i.setAttribute(e,n.getAttribute(e)||"")}),i},isInertiaManagedElement:function(e){return e.nodeType===Node.ELEMENT_NODE&&null!==e.getAttribute("inertia")},findMatchingElementIndex:function(e,t){var n=e.getAttribute("inertia");return null!==n?t.findIndex(function(e){return e.getAttribute("inertia")===n}):-1},update:a(function(e){var t=this,n=e.map(function(e){return t.buildDOMElement(e)});Array.from(document.head.childNodes).filter(function(e){return t.isInertiaManagedElement(e)}).forEach(function(e){var i=t.findMatchingElementIndex(e,n);if(-1!==i){var r,o=n.splice(i,1)[0];o&&!e.isEqualNode(o)&&(null==e||null==(r=e.parentNode)||r.replaceChild(o,e))}else{var s;null==e||null==(s=e.parentNode)||s.removeChild(e)}}),n.forEach(function(e){return document.head.appendChild(e)})},1)},S=new w;exports.Inertia=S,exports.createHeadManager=function(e,t,n){var i={},r=0;function o(){var e=Object.values(i).reduce(function(e,t){return e.concat(t)},[]).reduce(function(e,n){if(-1===n.indexOf("<"))return e;if(0===n.indexOf("<title ")){var i=n.match(/(<title [^>]+>)(.*?)(<\/title>)/);return e.title=i?""+i[1]+t(i[2])+i[3]:n,e}var r=n.match(/ inertia="[^"]+"/);return r?e[r[0]]=n:e[Object.keys(e).length]=n,e},{});return Object.values(e)}function s(){e?n(o()):y.update(o())}return{createProvider:function(){var e=function(){var e=r+=1;return i[e]=[],e.toString()}();return{update:function(t){return function(e,t){void 0===t&&(t=[]),null!==e&&Object.keys(i).indexOf(e)>-1&&(i[e]=t),s()}(e,t)},disconnect:function(){return function(e){null!==e&&-1!==Object.keys(i).indexOf(e)&&(delete i[e],s())}(e)}}}}},exports.hrefToUrl=u,exports.mergeDataIntoQueryString=h,exports.shouldIntercept=function(e){var t="a"===e.currentTarget.tagName.toLowerCase();return!(e.target&&null!=e&&e.target.isContentEditable||e.defaultPrevented||t&&e.which>1||t&&e.altKey||t&&e.ctrlKey||t&&e.metaKey||t&&e.shiftKey)},exports.urlWithoutHash=p;
 //# sourceMappingURL=index.js.map
 
 
@@ -2337,19 +2337,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
 /* harmony import */ var _mixins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/mixins */ "./resources/js/mixins/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return generator._invoke = function (innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; }(innerFn, self, context), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; this._invoke = function (method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); }; } function maybeInvokeDelegate(delegate, context) { var method = delegate.iterator[context.method]; if (undefined === method) { if (context.delegate = null, "throw" === context.method) { if (delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method)) return ContinueSentinel; context.method = "throw", context.arg = new TypeError("The iterator does not provide a 'throw' method"); } return ContinueSentinel; } var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) { if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; } return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, define(Gp, "constructor", GeneratorFunctionPrototype), define(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (object) { var keys = []; for (var key in object) { keys.push(key); } return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) { "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); } }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
-
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2396,13 +2389,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     closePreviewModal: function closePreviewModal() {
       this.previewModalOpen = false;
     },
-
     /**
      * Show the confirmation modal for deleting or detaching a resource
-     */
-    confirmDelete: function confirmDelete() {
+     */confirmDelete: function confirmDelete() {
       var _this = this;
-
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
@@ -2412,22 +2402,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   Nova.success(_this.__('The :resource was deleted!', {
                     resource: _this.resourceInformation.singularLabel.toLowerCase()
                   }));
-
                   if (response && response.data && response.data.redirect) {
                     Nova.visit(response.data.redirect);
                     return;
                   }
-
                   if (!_this.resource.softDeletes) {
                     Nova.visit("/resources/".concat(_this.resourceName));
                     return;
                   }
-
                   _this.closeDeleteModal();
-
                   _this.$emit('resource-deleted');
                 });
-
               case 1:
               case "end":
                 return _context.stop();
@@ -2436,27 +2421,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee);
       }))();
     },
-
     /**
      * Open the delete modal
-     */
-    openDeleteModal: function openDeleteModal() {
+     */openDeleteModal: function openDeleteModal() {
       this.deleteModalOpen = true;
     },
-
     /**
      * Close the delete modal
-     */
-    closeDeleteModal: function closeDeleteModal() {
+     */closeDeleteModal: function closeDeleteModal() {
       this.deleteModalOpen = false;
     },
-
     /**
      * Show the confirmation modal for restoring a resource
-     */
-    confirmRestore: function confirmRestore() {
+     */confirmRestore: function confirmRestore() {
       var _this2 = this;
-
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) {
@@ -2466,12 +2444,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   Nova.success(_this2.__('The :resource was restored!', {
                     resource: _this2.resourceInformation.singularLabel.toLowerCase()
                   }));
-
                   _this2.closeRestoreModal();
-
                   _this2.$emit('resource-restored');
                 });
-
               case 1:
               case "end":
                 return _context2.stop();
@@ -2480,27 +2455,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee2);
       }))();
     },
-
     /**
      * Open the restore modal
-     */
-    openRestoreModal: function openRestoreModal() {
+     */openRestoreModal: function openRestoreModal() {
       this.restoreModalOpen = true;
     },
-
     /**
      * Close the restore modal
-     */
-    closeRestoreModal: function closeRestoreModal() {
+     */closeRestoreModal: function closeRestoreModal() {
       this.restoreModalOpen = false;
     },
-
     /**
      * Show the confirmation modal for force deleting
-     */
-    confirmForceDelete: function confirmForceDelete() {
+     */confirmForceDelete: function confirmForceDelete() {
       var _this3 = this;
-
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
         return _regeneratorRuntime().wrap(function _callee3$(_context3) {
           while (1) {
@@ -2510,15 +2478,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   Nova.success(_this3.__('The :resource was deleted!', {
                     resource: _this3.resourceInformation.singularLabel.toLowerCase()
                   }));
-
                   if (response && response.data && response.data.redirect) {
                     Nova.visit(response.data.redirect);
                     return;
                   }
-
                   Nova.visit("/resources/".concat(_this3.resourceName));
                 });
-
               case 1:
               case "end":
                 return _context3.stop();
@@ -2527,18 +2492,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee3);
       }))();
     },
-
     /**
      * Open the force delete modal
-     */
-    openForceDeleteModal: function openForceDeleteModal() {
+     */openForceDeleteModal: function openForceDeleteModal() {
       this.forceDeleteModalOpen = true;
     },
-
     /**
      * Close the force delete modal
-     */
-    closeForceDeleteModal: function closeForceDeleteModal() {
+     */closeForceDeleteModal: function closeForceDeleteModal() {
       this.forceDeleteModalOpen = false;
     }
   }),
@@ -2598,23 +2559,14 @@ var _hoisted_5 = {
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Icon = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Icon");
-
   var _component_BasicButton = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("BasicButton");
-
   var _component_DropdownTrigger = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("DropdownTrigger");
-
   var _component_DropdownMenuItem = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("DropdownMenuItem");
-
   var _component_ScrollWrap = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ScrollWrap");
-
   var _component_DropdownMenu = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("DropdownMenu");
-
   var _component_Dropdown = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Dropdown");
-
   var _component_DeleteResourceModal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("DeleteResourceModal");
-
   var _component_RestoreResourceModal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("RestoreResourceModal");
-
   return $options.hasDropdownItems ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [$props.actions.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
     key: 0,
     dusk: "".concat($props.resource.id.value, "-inline-actions"),
@@ -2629,14 +2581,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       title: action.name,
       destructive: action.destructive,
       "class": "shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded text-sm font-bold focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 inline-flex items-center justify-center h-9 px-3 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900"
-    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(action.name), 9
-    /* TEXT, PROPS */
-    , _hoisted_3);
-  }), 128
-  /* KEYED_FRAGMENT */
-  ))], 8
-  /* PROPS */
-  , _hoisted_2)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Dropdown, null, {
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(action.name), 9 /* TEXT, PROPS */, _hoisted_3);
+  }), 128 /* KEYED_FRAGMENT */))], 8 /* PROPS */, _hoisted_2)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Dropdown, null, {
     menu: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_DropdownMenu, {
         width: "auto",
@@ -2659,16 +2605,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 title: _ctx.__('Replicate')
               }, {
                 "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.__('Replicate')), 1
-                  /* TEXT */
-                  )];
+                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.__('Replicate')), 1 /* TEXT */)];
                 }),
-                _: 1
-                /* STABLE */
 
-              }, 8
-              /* PROPS */
-              , ["dusk", "href", "title"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Impersonate Resource Button "), $options.canBeImpersonated ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_DropdownMenuItem, {
+                _: 1 /* STABLE */
+              }, 8 /* PROPS */, ["dusk", "href", "title"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Impersonate Resource Button "), $options.canBeImpersonated ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_DropdownMenuItem, {
                 key: 1,
                 as: "button",
                 dusk: "".concat($props.resource.id.value, "-impersonate-button"),
@@ -2681,16 +2622,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 title: _ctx.__('Impersonate')
               }, {
                 "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.__('Impersonate')), 1
-                  /* TEXT */
-                  )];
+                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.__('Impersonate')), 1 /* TEXT */)];
                 }),
-                _: 1
-                /* STABLE */
 
-              }, 8
-              /* PROPS */
-              , ["dusk", "title"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.resource.authorizedToDelete && !$props.resource.softDeleted ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_DropdownMenuItem, {
+                _: 1 /* STABLE */
+              }, 8 /* PROPS */, ["dusk", "title"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.resource.authorizedToDelete && !$props.resource.softDeleted ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_DropdownMenuItem, {
                 key: 2,
                 "data-testid": "open-delete-modal",
                 dusk: "open-delete-modal-button",
@@ -2698,16 +2634,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 destructive: true
               }, {
                 "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.__('Delete Resource')), 1
-                  /* TEXT */
-                  )];
+                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.__('Delete Resource')), 1 /* TEXT */)];
                 }),
-                _: 1
-                /* STABLE */
 
-              }, 8
-              /* PROPS */
-              , ["onClick"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.resource.authorizedToRestore && $props.resource.softDeleted ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_DropdownMenuItem, {
+                _: 1 /* STABLE */
+              }, 8 /* PROPS */, ["onClick"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.resource.authorizedToRestore && $props.resource.softDeleted ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_DropdownMenuItem, {
                 key: 3,
                 as: "button",
                 "class": "block text-sm text-left w-full px-3 py-1 font-semibold text-red-400 hover:text-red-300 focus:text-red-600 focus:outline-none focus:ring ring-inset",
@@ -2716,16 +2647,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($options.openRestoreModal, ["prevent"])
               }, {
                 "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.__('Restore Resource')), 1
-                  /* TEXT */
-                  )];
+                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.__('Restore Resource')), 1 /* TEXT */)];
                 }),
-                _: 1
-                /* STABLE */
 
-              }, 8
-              /* PROPS */
-              , ["onClick"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.resource.authorizedToForceDelete ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_DropdownMenuItem, {
+                _: 1 /* STABLE */
+              }, 8 /* PROPS */, ["onClick"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.resource.authorizedToForceDelete ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_DropdownMenuItem, {
                 key: 4,
                 as: "button",
                 "class": "block text-sm text-left w-full px-3 py-1 font-semibold text-red-400 hover:text-red-300 focus:text-red-600 focus:outline-none focus:ring ring-inset",
@@ -2735,31 +2661,22 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 destructive: true
               }, {
                 "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.__('Force Delete Resource')), 1
-                  /* TEXT */
-                  )];
+                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.__('Force Delete Resource')), 1 /* TEXT */)];
                 }),
-                _: 1
-                /* STABLE */
 
-              }, 8
-              /* PROPS */
-              , ["onClick"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
+                _: 1 /* STABLE */
+              }, 8 /* PROPS */, ["onClick"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
             }),
-            _: 1
-            /* STABLE */
-
+            _: 1 /* STABLE */
           })];
         }),
-        _: 1
-        /* STABLE */
 
+        _: 1 /* STABLE */
       })];
     }),
+
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.__('Resource Row Dropdown')), 1
-      /* TEXT */
-      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_DropdownTrigger, {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.__('Resource Row Dropdown')), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_DropdownTrigger, {
         dusk: "".concat($props.resource.id.value, "-control-selector"),
         "show-arrow": false,
         "class": "rounded hover:bg-gray-200 dark:hover:bg-gray-800 focus:outline-none focus:ring"
@@ -2774,21 +2691,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 type: "dots-horizontal"
               })];
             }),
-            _: 1
-            /* STABLE */
-
+            _: 1 /* STABLE */
           })];
         }),
-        _: 1
-        /* STABLE */
 
-      }, 8
-      /* PROPS */
-      , ["dusk"])];
+        _: 1 /* STABLE */
+      }, 8 /* PROPS */, ["dusk"])];
     }),
-    _: 1
-    /* STABLE */
-
+    _: 1 /* STABLE */
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Action Confirmation Modal "), _ctx.confirmActionModalOpened ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)((0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDynamicComponent)(_ctx.selectedAction.component), {
     key: 1,
     show: _ctx.confirmActionModalOpened,
@@ -2800,36 +2710,26 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     errors: _ctx.errors,
     onConfirm: _ctx.executeAction,
     onClose: _ctx.closeConfirmationModal
-  }, null, 40
-  /* PROPS, HYDRATE_EVENTS */
-  , ["show", "working", "selected-resources", "resource-name", "action", "endpoint", "errors", "onConfirm", "onClose"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Action Response Modal "), _ctx.selectedAction ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)((0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDynamicComponent)(_ctx.actionResponseData.modal), {
+  }, null, 40 /* PROPS, HYDRATE_EVENTS */, ["show", "working", "selected-resources", "resource-name", "action", "endpoint", "errors", "onConfirm", "onClose"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Action Response Modal "), _ctx.selectedAction ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)((0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDynamicComponent)(_ctx.actionResponseData.modal), {
     key: 2,
     onClose: _ctx.closeActionResponseModal,
     show: _ctx.showActionResponseModal,
     data: _ctx.actionResponseData
-  }, null, 40
-  /* PROPS, HYDRATE_EVENTS */
-  , ["onClose", "show", "data"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_DeleteResourceModal, {
+  }, null, 40 /* PROPS, HYDRATE_EVENTS */, ["onClose", "show", "data"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_DeleteResourceModal, {
     show: _ctx.deleteModalOpen,
     mode: "delete",
     onClose: $options.closeDeleteModal,
     onConfirm: $options.confirmDelete
-  }, null, 8
-  /* PROPS */
-  , ["show", "onClose", "onConfirm"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_RestoreResourceModal, {
+  }, null, 8 /* PROPS */, ["show", "onClose", "onConfirm"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_RestoreResourceModal, {
     show: _ctx.restoreModalOpen,
     onClose: $options.closeRestoreModal,
     onConfirm: $options.confirmRestore
-  }, null, 8
-  /* PROPS */
-  , ["show", "onClose", "onConfirm"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_DeleteResourceModal, {
+  }, null, 8 /* PROPS */, ["show", "onClose", "onConfirm"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_DeleteResourceModal, {
     show: _ctx.forceDeleteModalOpen,
     mode: "force delete",
     onClose: $options.closeForceDeleteModal,
     onConfirm: $options.confirmForceDelete
-  }, null, 8
-  /* PROPS */
-  , ["show", "onClose", "onConfirm"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true);
+  }, null, 8 /* PROPS */, ["show", "onClose", "onConfirm"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true);
 }
 
 /***/ }),
@@ -2867,8 +2767,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     /**
      * Handle the actionExecuted event and pass it up the chain.
-     */
-    actionExecuted: function actionExecuted() {
+     */actionExecuted: function actionExecuted() {
       this.$emit('actionExecuted');
     }
   }
@@ -2941,8 +2840,8 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         var input = document.createElement('input');
         var _ref = [document.documentElement.scrollTop, document.documentElement.scrollLeft],
-            scrollTop = _ref[0],
-            scrollLeft = _ref[1];
+          scrollTop = _ref[0],
+          scrollLeft = _ref[1];
         document.body.appendChild(input);
         input.value = value;
         input.focus();
@@ -2974,34 +2873,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash_map__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash/map */ "./node_modules/lodash/map.js");
 /* harmony import */ var lodash_map__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_map__WEBPACK_IMPORTED_MODULE_1__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   methods: {
     /**
      * Open the delete menu modal.
-     */
-    openDeleteModal: function openDeleteModal() {
+     */openDeleteModal: function openDeleteModal() {
       this.deleteModalOpen = true;
     },
-
     /**
      * Delete the given resources.
-     */
-    deleteResources: function deleteResources(resources) {
+     */deleteResources: function deleteResources(resources) {
       var _this = this;
-
       var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-
       if (this.viaManyToMany) {
         return this.detachResources(resources);
       }
-
       return Nova.request({
         url: '/nova-api/' + this.resourceName,
         method: 'delete',
@@ -3010,30 +2900,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         })
       }).then(callback ? callback : function () {
         _this.deleteModalOpen = false;
-
         _this.getResources();
       }).then(function () {
         Nova.$emit('resources-deleted');
       });
     },
-
     /**
      * Delete the selected resources.
-     */
-    deleteSelectedResources: function deleteSelectedResources() {
+     */deleteSelectedResources: function deleteSelectedResources() {
       this.deleteResources(this.selectedResources);
     },
-
     /**
      * Delete all of the matching resources.
-     */
-    deleteAllMatchingResources: function deleteAllMatchingResources() {
+     */deleteAllMatchingResources: function deleteAllMatchingResources() {
       var _this2 = this;
-
       if (this.viaManyToMany) {
         return this.detachAllMatchingResources();
       }
-
       return Nova.request({
         url: this.deleteAllMatchingResourcesEndpoint,
         method: 'delete',
@@ -3042,19 +2925,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         })
       }).then(function () {
         _this2.deleteModalOpen = false;
-
         _this2.getResources();
       }).then(function () {
         Nova.$emit('resources-deleted');
       });
     },
-
     /**
      * Detach the given resources.
-     */
-    detachResources: function detachResources(resources) {
+     */detachResources: function detachResources(resources) {
       var _this3 = this;
-
       return Nova.request({
         url: '/nova-api/' + this.resourceName + '/detach',
         method: 'delete',
@@ -3065,19 +2944,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         })
       }).then(function () {
         _this3.deleteModalOpen = false;
-
         _this3.getResources();
       }).then(function () {
         Nova.$emit('resources-detached');
       });
     },
-
     /**
      * Detach all of the matching resources.
-     */
-    detachAllMatchingResources: function detachAllMatchingResources() {
+     */detachAllMatchingResources: function detachAllMatchingResources() {
       var _this4 = this;
-
       return Nova.request({
         url: '/nova-api/' + this.resourceName + '/detach',
         method: 'delete',
@@ -3086,19 +2961,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         })
       }).then(function () {
         _this4.deleteModalOpen = false;
-
         _this4.getResources();
       }).then(function () {
         Nova.$emit('resources-detached');
       });
     },
-
     /**
      * Force delete the given resources.
-     */
-    forceDeleteResources: function forceDeleteResources(resources) {
+     */forceDeleteResources: function forceDeleteResources(resources) {
       var _this5 = this;
-
       var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
       return Nova.request({
         url: '/nova-api/' + this.resourceName + '/force',
@@ -3108,26 +2979,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         })
       }).then(callback ? callback : function () {
         _this5.deleteModalOpen = false;
-
         _this5.getResources();
       }).then(function () {
         Nova.$emit('resources-deleted');
       });
     },
-
     /**
      * Force delete the selected resources.
-     */
-    forceDeleteSelectedResources: function forceDeleteSelectedResources() {
+     */forceDeleteSelectedResources: function forceDeleteSelectedResources() {
       this.forceDeleteResources(this.selectedResources);
     },
-
     /**
      * Force delete all of the matching resources.
-     */
-    forceDeleteAllMatchingResources: function forceDeleteAllMatchingResources() {
+     */forceDeleteAllMatchingResources: function forceDeleteAllMatchingResources() {
       var _this6 = this;
-
       return Nova.request({
         url: this.forceDeleteSelectedResourcesEndpoint,
         method: 'delete',
@@ -3136,19 +3001,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         })
       }).then(function () {
         _this6.deleteModalOpen = false;
-
         _this6.getResources();
       }).then(function () {
         Nova.$emit('resources-deleted');
       });
     },
-
     /**
      * Restore the given resources.
-     */
-    restoreResources: function restoreResources(resources) {
+     */restoreResources: function restoreResources(resources) {
       var _this7 = this;
-
       var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
       return Nova.request({
         url: '/nova-api/' + this.resourceName + '/restore',
@@ -3158,26 +3019,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         })
       }).then(callback ? callback : function () {
         _this7.restoreModalOpen = false;
-
         _this7.getResources();
       }).then(function () {
         Nova.$emit('resources-restored');
       });
     },
-
     /**
      * Restore the selected resources.
-     */
-    restoreSelectedResources: function restoreSelectedResources() {
+     */restoreSelectedResources: function restoreSelectedResources() {
       this.restoreResources(this.selectedResources);
     },
-
     /**
      * Restore all of the matching resources.
-     */
-    restoreAllMatchingResources: function restoreAllMatchingResources() {
+     */restoreAllMatchingResources: function restoreAllMatchingResources() {
       var _this8 = this;
-
       return Nova.request({
         url: this.restoreAllMatchingResourcesEndpoint,
         method: 'put',
@@ -3186,7 +3041,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         })
       }).then(function () {
         _this8.restoreModalOpen = false;
-
         _this8.getResources();
       }).then(function () {
         Nova.$emit('resources-restored');
@@ -3196,41 +3050,31 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: {
     /**
      * Get the delete all matching resources endpoint.
-     */
-    deleteAllMatchingResourcesEndpoint: function deleteAllMatchingResourcesEndpoint() {
+     */deleteAllMatchingResourcesEndpoint: function deleteAllMatchingResourcesEndpoint() {
       if (this.lens) {
         return '/nova-api/' + this.resourceName + '/lens/' + this.lens;
       }
-
       return '/nova-api/' + this.resourceName;
     },
-
     /**
      * Get the force delete all of the matching resources endpoint.
-     */
-    forceDeleteSelectedResourcesEndpoint: function forceDeleteSelectedResourcesEndpoint() {
+     */forceDeleteSelectedResourcesEndpoint: function forceDeleteSelectedResourcesEndpoint() {
       if (this.lens) {
         return '/nova-api/' + this.resourceName + '/lens/' + this.lens + '/force';
       }
-
       return '/nova-api/' + this.resourceName + '/force';
     },
-
     /**
      * Get the restore all of the matching resources endpoint.
-     */
-    restoreAllMatchingResourcesEndpoint: function restoreAllMatchingResourcesEndpoint() {
+     */restoreAllMatchingResourcesEndpoint: function restoreAllMatchingResourcesEndpoint() {
       if (this.lens) {
         return '/nova-api/' + this.resourceName + '/lens/' + this.lens + '/restore';
       }
-
       return '/nova-api/' + this.resourceName + '/restore';
     },
-
     /**
      * Get the query string for a deletable resource request.
-     */
-    deletableQueryString: function deletableQueryString() {
+     */deletableQueryString: function deletableQueryString() {
       return {
         search: this.currentSearch,
         filters: this.encodedFilters,
@@ -3242,13 +3086,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   }
 });
-
 function mapResources(resources) {
   return lodash_map__WEBPACK_IMPORTED_MODULE_1___default()(resources, function (resource) {
     return resource.id.value;
   });
 }
-
 function mapPivots(resources) {
   return lodash_filter__WEBPACK_IMPORTED_MODULE_0___default()(lodash_map__WEBPACK_IMPORTED_MODULE_1___default()(resources, function (resource) {
     return resource.id.pivotValue;
@@ -3287,11 +3129,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _FormField__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./FormField */ "./resources/js/mixins/FormField.js");
 /* harmony import */ var _propTypes__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./propTypes */ "./resources/js/mixins/propTypes.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -3304,6 +3143,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   "extends": _FormField__WEBPACK_IMPORTED_MODULE_8__["default"],
+  emits: ['field-shown', 'field-hidden'],
   props: _objectSpread(_objectSpread({}, (0,_propTypes__WEBPACK_IMPORTED_MODULE_9__.mapProps)(['shownViaNewRelationModal', 'field', 'viaResource', 'viaResourceId', 'viaRelationship', 'resourceName', 'resourceId', 'relatedResourceName', 'relatedResourceId'])), {}, {
     syncEndpoint: {
       type: String,
@@ -3328,10 +3168,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   mounted: function mounted() {
     var _this = this;
-
     if (this.relatedResourceName !== '' && !lodash_isNil__WEBPACK_IMPORTED_MODULE_6___default()(this.relatedResourceName)) {
       this.pivot = true;
-
       if (this.relatedResourceId !== '' && !lodash_isNil__WEBPACK_IMPORTED_MODULE_6___default()(this.relatedResourceId)) {
         this.editMode = 'update-attached';
       } else {
@@ -3342,17 +3180,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.editMode = 'update';
       }
     }
-
     if (!lodash_isEmpty__WEBPACK_IMPORTED_MODULE_5___default()(this.dependsOn)) {
       lodash_forIn__WEBPACK_IMPORTED_MODULE_2___default()(this.dependsOn, function (defaultValue, dependsOn) {
         _this.watchedEvents[dependsOn] = function (value) {
           _this.watchedFields[dependsOn] = value;
-
           _this.dependentFieldDebouncer(function () {
             return _this.syncField();
           });
         };
-
         _this.watchedFields[dependsOn] = defaultValue;
         Nova.$on(_this.getFieldAttributeChangeEventName(dependsOn), _this.watchedEvents[dependsOn]);
       });
@@ -3360,7 +3195,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   beforeUnmount: function beforeUnmount() {
     var _this2 = this;
-
     if (!lodash_isEmpty__WEBPACK_IMPORTED_MODULE_5___default()(this.watchedEvents)) {
       lodash_forIn__WEBPACK_IMPORTED_MODULE_2___default()(this.watchedEvents, function (event, dependsOn) {
         Nova.$off(_this2.getFieldAttributeChangeEventName(event.dependsOn), event);
@@ -3370,22 +3204,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: {
     /*
      * Set the initial value for the field
-     */
-    setInitialValue: function setInitialValue() {
+     */setInitialValue: function setInitialValue() {
       this.value = !(this.currentField.value === undefined || this.currentField.value === null) ? this.currentField.value : this.value;
     },
-
     /**
      * Provide a function to fills FormData when field is visible.
-     */
-    fillIfVisible: function fillIfVisible(formData, attribute, value) {
+     */fillIfVisible: function fillIfVisible(formData, attribute, value) {
       if (this.currentlyIsVisible) {
         formData.append(attribute, value);
       }
     },
     syncField: function syncField() {
       var _this3 = this;
-
       if (this.canceller !== null) this.canceller();
       Nova.request().patch(this.syncEndpoint || this.syncFieldEndpoint, this.watchedFields, {
         params: lodash_pickBy__WEBPACK_IMPORTED_MODULE_7___default()({
@@ -3395,49 +3225,46 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           viaResourceId: this.viaResourceId,
           viaRelationship: this.viaRelationship,
           field: this.field.attribute,
-          component: this.field.component
+          component: this.field.dependentComponentKey
         }, (lodash_identity__WEBPACK_IMPORTED_MODULE_4___default())),
         cancelToken: new axios__WEBPACK_IMPORTED_MODULE_0__.CancelToken(function (canceller) {
           _this3.canceller = canceller;
         })
       }).then(function (response) {
+        var wasVisible = _this3.currentlyIsVisible;
         _this3.syncedField = response.data;
-
+        if (_this3.syncedField.visible !== wasVisible) {
+          _this3.$emit(_this3.syncedField.visible === true ? 'field-shown' : 'field-hidden', _this3.field.attribute);
+        }
         if (lodash_isNil__WEBPACK_IMPORTED_MODULE_6___default()(_this3.syncedField.value)) {
           _this3.syncedField.value = _this3.field.value;
         } else {
           _this3.setInitialValue();
         }
-
         _this3.onSyncedField();
       });
     },
-    onSyncedField: function onSyncedField() {//
+    onSyncedField: function onSyncedField() {
+      //
     }
   },
   computed: {
     /**
      * Determine if the field is in readonly mode
-     */
-    currentField: function currentField() {
+     */currentField: function currentField() {
       return this.syncedField || this.field;
     },
-
     /**
      * Determine if the field is in visible mode
-     */
-    currentlyIsVisible: function currentlyIsVisible() {
+     */currentlyIsVisible: function currentlyIsVisible() {
       return this.currentField.visible;
     },
-
     /**
      * Determine if the field is in readonly mode
-     */
-    currentlyIsReadonly: function currentlyIsReadonly() {
+     */currentlyIsReadonly: function currentlyIsReadonly() {
       if (this.syncedField !== null) {
         return Boolean(this.syncedField.readonly || lodash_get__WEBPACK_IMPORTED_MODULE_3___default()(this.syncedField, 'extraAttributes.readonly'));
       }
-
       return Boolean(this.field.readonly || lodash_get__WEBPACK_IMPORTED_MODULE_3___default()(this.field, 'extraAttributes.readonly'));
     },
     dependsOn: function dependsOn() {
@@ -3451,8 +3278,84 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       } else if (this.editMode === 'update') {
         return "/nova-api/".concat(this.resourceName, "/").concat(this.resourceId, "/update-fields");
       }
-
       return "/nova-api/".concat(this.resourceName, "/creation-fields");
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/mixins/FieldSuggestions.js":
+/*!*************************************************!*\
+  !*** ./resources/js/mixins/FieldSuggestions.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var lodash_isNil__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash/isNil */ "./node_modules/lodash/isNil.js");
+/* harmony import */ var lodash_isNil__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_isNil__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var lodash_omitBy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash/omitBy */ "./node_modules/lodash/omitBy.js");
+/* harmony import */ var lodash_omitBy__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_omitBy__WEBPACK_IMPORTED_MODULE_1__);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  computed: {
+    suggestionsId: function suggestionsId() {
+      return "".concat(this.field.attribute, "-list");
+    },
+    suggestions: function suggestions() {
+      var field = !lodash_isNil__WEBPACK_IMPORTED_MODULE_0___default()(this.syncedField) ? this.syncedField : this.field;
+      if (lodash_isNil__WEBPACK_IMPORTED_MODULE_0___default()(field.suggestions)) {
+        return [];
+      }
+      return field.suggestions;
+    },
+    suggestionsAttributes: function suggestionsAttributes() {
+      return _objectSpread({}, lodash_omitBy__WEBPACK_IMPORTED_MODULE_1___default()({
+        list: this.suggestions.length > 0 ? this.suggestionsId : null
+      }, (lodash_isNil__WEBPACK_IMPORTED_MODULE_0___default())));
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/mixins/FieldValue.js":
+/*!*******************************************!*\
+  !*** ./resources/js/mixins/FieldValue.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _util_filled__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/filled */ "./resources/js/util/filled.js");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  computed: {
+    fieldHasValue: function fieldHasValue() {
+      return (0,_util_filled__WEBPACK_IMPORTED_MODULE_0__["default"])(this.field.value);
+    },
+    usesCustomizedDisplay: function usesCustomizedDisplay() {
+      return this.field.usesCustomizedDisplay && (0,_util_filled__WEBPACK_IMPORTED_MODULE_0__["default"])(this.field.displayedAs);
+    },
+    fieldValue: function fieldValue() {
+      if (!this.usesCustomizedDisplay && !this.fieldHasValue) {
+        return null;
+      }
+      return String(this.field.displayedAs || this.field.value);
+    },
+    shouldDisplayAsHtml: function shouldDisplayAsHtml() {
+      return this.field.asHtml;
     }
   }
 });
@@ -3475,15 +3378,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash_pickBy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash/pickBy */ "./node_modules/lodash/pickBy.js");
 /* harmony import */ var lodash_pickBy__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_pickBy__WEBPACK_IMPORTED_MODULE_1__);
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return generator._invoke = function (innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; }(innerFn, self, context), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; this._invoke = function (method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); }; } function maybeInvokeDelegate(delegate, context) { var method = delegate.iterator[context.method]; if (undefined === method) { if (context.delegate = null, "throw" === context.method) { if (delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method)) return ContinueSentinel; context.method = "throw", context.arg = new TypeError("The iterator does not provide a 'throw' method"); } return ContinueSentinel; } var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) { if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; } return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, define(Gp, "constructor", GeneratorFunctionPrototype), define(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (object) { var keys = []; for (var key in object) { keys.push(key); } return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) { "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); } }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3492,16 +3390,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       filterIsActive: false
     };
   },
+  watch: {
+    encodedFilters: function encodedFilters(value) {
+      Nova.$emit('filter-changed', [value]);
+    }
+  },
   methods: {
     /**
      * Clear filters and reset the resource table
-     */
-    clearSelectedFilters: function clearSelectedFilters(lens) {
+     */clearSelectedFilters: function clearSelectedFilters(lens) {
       var _this = this;
-
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var _this$updateQueryStri;
-
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -3510,30 +3410,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _context.next = 5;
                   break;
                 }
-
                 _context.next = 3;
                 return _this.$store.dispatch("".concat(_this.resourceName, "/resetFilterState"), {
                   resourceName: _this.resourceName,
                   lens: lens
                 });
-
               case 3:
                 _context.next = 7;
                 break;
-
               case 5:
                 _context.next = 7;
                 return _this.$store.dispatch("".concat(_this.resourceName, "/resetFilterState"), {
                   resourceName: _this.resourceName
                 });
-
               case 7:
                 _this.updateQueryString((_this$updateQueryStri = {}, _defineProperty(_this$updateQueryStri, _this.pageParameter, 1), _defineProperty(_this$updateQueryStri, _this.filterParameter, ''), _this$updateQueryStri));
-
                 Nova.$emit('filter-reset');
-                Nova.$emit('filter-changed', ['']);
-
-              case 10:
+              case 9:
               case "end":
                 return _context.stop();
             }
@@ -3541,30 +3434,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-
     /**
      * Handle a filter state change.
-     */
-    filterChanged: function filterChanged() {
+     */filterChanged: function filterChanged() {
       var filtersAreApplied = this.$store.getters["".concat(this.resourceName, "/filtersAreApplied")];
-      var currentEncodedFilters = this.$store.getters["".concat(this.resourceName, "/currentEncodedFilters")];
-
       if (filtersAreApplied || this.filterIsActive) {
         var _this$updateQueryStri2;
-
         this.filterIsActive = true;
-        this.updateQueryString((_this$updateQueryStri2 = {}, _defineProperty(_this$updateQueryStri2, this.pageParameter, 1), _defineProperty(_this$updateQueryStri2, this.filterParameter, currentEncodedFilters), _this$updateQueryStri2));
+        this.updateQueryString((_this$updateQueryStri2 = {}, _defineProperty(_this$updateQueryStri2, this.pageParameter, 1), _defineProperty(_this$updateQueryStri2, this.filterParameter, this.encodedFilters), _this$updateQueryStri2));
       }
-
-      Nova.$emit('filter-changed', [currentEncodedFilters]);
     },
-
     /**
      * Set up filters for the current view
-     */
-    initializeFilters: function initializeFilters(lens) {
+     */initializeFilters: function initializeFilters(lens) {
       var _this2 = this;
-
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) {
@@ -3572,7 +3455,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 // Clear out the filters from the store first
                 _this2.$store.commit("".concat(_this2.resourceName, "/clearFilters"));
-
                 _context2.next = 3;
                 return _this2.$store.dispatch("".concat(_this2.resourceName, "/fetchFilters"), lodash_pickBy__WEBPACK_IMPORTED_MODULE_1___default()({
                   resourceName: _this2.resourceName,
@@ -3582,11 +3464,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   relationshipType: _this2.relationshipType,
                   lens: lens
                 }, (lodash_identity__WEBPACK_IMPORTED_MODULE_0___default())));
-
               case 3:
                 _context2.next = 5;
                 return _this2.initializeState(lens);
-
               case 5:
               case "end":
                 return _context2.stop();
@@ -3595,13 +3475,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
-
     /**
      * Initialize the filter state
-     */
-    initializeState: function initializeState(lens) {
+     */initializeState: function initializeState(lens) {
       var _this3 = this;
-
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
         return _regeneratorRuntime().wrap(function _callee3$(_context3) {
           while (1) {
@@ -3611,21 +3488,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _context3.next = 5;
                   break;
                 }
-
                 _context3.next = 3;
                 return _this3.$store.dispatch("".concat(_this3.resourceName, "/initializeCurrentFilterValuesFromQueryString"), _this3.initialEncodedFilters);
-
               case 3:
                 _context3.next = 7;
                 break;
-
               case 5:
                 _context3.next = 7;
                 return _this3.$store.dispatch("".concat(_this3.resourceName, "/resetFilterState"), {
                   resourceName: _this3.resourceName,
                   lens: lens
                 });
-
               case 7:
               case "end":
                 return _context3.stop();
@@ -3638,9 +3511,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   computed: {
     /**
      * Get the name of the filter query string variable.
-     */
-    filterParameter: function filterParameter() {
+     */filterParameter: function filterParameter() {
       return this.resourceName + '_filter';
+    },
+    encodedFilters: function encodedFilters() {
+      return this.$store.getters["".concat(this.resourceName, "/currentEncodedFilters")];
     }
   }
 });
@@ -3672,52 +3547,41 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     emitFieldValue: function emitFieldValue(attribute, value) {
       Nova.$emit("".concat(attribute, "-value"), value);
-
       if (this.hasFormUniqueId === true) {
         Nova.$emit("".concat(this.formUniqueId, "-").concat(attribute, "-value"), value);
       }
     },
     emitFieldValueChange: function emitFieldValueChange(attribute, value) {
       Nova.$emit("".concat(attribute, "-change"), value);
-
       if (this.hasFormUniqueId === true) {
         Nova.$emit("".concat(this.formUniqueId, "-").concat(attribute, "-change"), value);
       }
     },
-
     /**
      * Get field attribue value event name.
-     */
-    getFieldAttributeValueEventName: function getFieldAttributeValueEventName(attribute) {
+     */getFieldAttributeValueEventName: function getFieldAttributeValueEventName(attribute) {
       return this.hasFormUniqueId === true ? "".concat(this.formUniqueId, "-").concat(attribute, "-value") : "".concat(attribute, "-value");
     },
-
     /**
      * Get field attribue value event name.
-     */
-    getFieldAttributeChangeEventName: function getFieldAttributeChangeEventName(attribute) {
+     */getFieldAttributeChangeEventName: function getFieldAttributeChangeEventName(attribute) {
       return this.hasFormUniqueId === true ? "".concat(this.formUniqueId, "-").concat(attribute, "-change") : "".concat(attribute, "-change");
     }
   },
   computed: {
     /**
      * Determine if the field has Form Unique ID.
-     */
-    hasFormUniqueId: function hasFormUniqueId() {
+     */hasFormUniqueId: function hasFormUniqueId() {
       return !lodash_isNil__WEBPACK_IMPORTED_MODULE_0___default()(this.formUniqueId) && this.formUniqueId !== '';
     },
-
     /**
      * Get field attribue value event name.
-     */
-    fieldAttributeValueEventName: function fieldAttributeValueEventName() {
+     */fieldAttributeValueEventName: function fieldAttributeValueEventName() {
       return this.getFieldAttributeValueEventName(this.field.attribute);
     },
-
     /**
      * Get field attribue value event name.
-     */
-    fieldAttributeChangeEventName: function fieldAttributeChangeEventName() {
+     */fieldAttributeChangeEventName: function fieldAttributeChangeEventName() {
       return this.getFieldAttributeChangeEventName(this.field.attribute);
     }
   }
@@ -3743,18 +3607,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _propTypes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./propTypes */ "./resources/js/mixins/propTypes.js");
 /* harmony import */ var _FormEvents__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./FormEvents */ "./resources/js/mixins/FormEvents.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   "extends": _FormEvents__WEBPACK_IMPORTED_MODULE_3__["default"],
-  props: _objectSpread(_objectSpread({}, (0,_propTypes__WEBPACK_IMPORTED_MODULE_2__.mapProps)(['shownViaNewRelationModal', 'field', 'viaResource', 'viaResourceId', 'viaRelationship', 'resourceName', 'showHelpText'])), {}, {
+  props: _objectSpread(_objectSpread({}, (0,_propTypes__WEBPACK_IMPORTED_MODULE_2__.mapProps)(['shownViaNewRelationModal', 'field', 'viaResource', 'viaResourceId', 'viaRelationship', 'resourceName', 'showHelpText', 'mode'])), {}, {
     formUniqueId: {
       type: String
     }
@@ -3765,10 +3626,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   mounted: function mounted() {
-    this.setInitialValue(); // Add a default fill method for the field
+    this.setInitialValue();
 
-    this.field.fill = this.fill; // Register a global event for setting the field's value
+    // Add a default fill method for the field
+    this.field.fill = this.fill;
 
+    // Register a global event for setting the field's value
     Nova.$on(this.fieldAttributeValueEventName, this.listenToValueChanges);
   },
   beforeUnmount: function beforeUnmount() {
@@ -3777,34 +3640,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: {
     /*
      * Set the initial value for the field
-     */
-    setInitialValue: function setInitialValue() {
+     */setInitialValue: function setInitialValue() {
       this.value = !(this.field.value === undefined || this.field.value === null) ? this.field.value : '';
     },
-
     /**
      * Provide a function that fills a passed FormData object with the
      * field's internal value attribute
-     */
-    fill: function fill(formData) {
+     */fill: function fill(formData) {
       this.fillIfVisible(formData, this.field.attribute, String(this.value));
     },
-
     /**
      * Provide a function to fills FormData when field is visible.
-     */
-    fillIfVisible: function fillIfVisible(formData, attribute, value) {
+     */fillIfVisible: function fillIfVisible(formData, attribute, value) {
       if (this.isVisible) {
         formData.append(attribute, value);
       }
     },
-
     /**
      * Update the field's internal value
-     */
-    handleChange: function handleChange(event) {
+     */handleChange: function handleChange(event) {
       this.value = event.target.value;
-
       if (this.field) {
         this.emitFieldValueChange(this.field.attribute, this.value);
       }
@@ -3816,15 +3671,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: {
     /**
      * Determine if the field is in visible mode
-     */
-    isVisible: function isVisible() {
+     */isVisible: function isVisible() {
       return this.field.visible;
     },
-
     /**
      * Determine if the field is in readonly mode
-     */
-    isReadonly: function isReadonly() {
+     */isReadonly: function isReadonly() {
       return Boolean(this.field.readonly || lodash_get__WEBPACK_IMPORTED_MODULE_0___default()(this.field, 'extraAttributes.readonly'));
     }
   }
@@ -3856,19 +3708,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var form_backend_validation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! form-backend-validation */ "./node_modules/form-backend-validation/dist/index.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return generator._invoke = function (innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; }(innerFn, self, context), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; this._invoke = function (method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); }; } function maybeInvokeDelegate(delegate, context) { var method = delegate.iterator[context.method]; if (undefined === method) { if (context.delegate = null, "throw" === context.method) { if (delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method)) return ContinueSentinel; context.method = "throw", context.arg = new TypeError("The iterator does not provide a 'throw' method"); } return ContinueSentinel; } var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) { if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; } return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, define(Gp, "constructor", GeneratorFunctionPrototype), define(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (object) { var keys = []; for (var key in object) { keys.push(key); } return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) { "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); } }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
-
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -3905,44 +3750,34 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.determineActionStrategy();
       this.$refs.selectControl.resetSelection();
     },
-
     /**
      * Determine whether the action should redirect or open a confirmation modal
-     */
-    determineActionStrategy: function determineActionStrategy() {
+     */determineActionStrategy: function determineActionStrategy() {
       if (this.selectedAction.withoutConfirmation) {
         this.executeAction();
       } else {
         this.openConfirmationModal();
       }
     },
-
     /**
      * Confirm with the user that they actually want to run the selected action.
-     */
-    openConfirmationModal: function openConfirmationModal() {
+     */openConfirmationModal: function openConfirmationModal() {
       this.confirmActionModalOpened = true;
     },
-
     /**
      * Close the action confirmation modal.
-     */
-    closeConfirmationModal: function closeConfirmationModal() {
+     */closeConfirmationModal: function closeConfirmationModal() {
       this.confirmActionModalOpened = false;
       this.errors = new form_backend_validation__WEBPACK_IMPORTED_MODULE_5__.Errors();
     },
-
     /**
      * Close the action response modal.
-     */
-    closeActionResponseModal: function closeActionResponseModal() {
+     */closeActionResponseModal: function closeActionResponseModal() {
       this.showActionResponseModal = false;
     },
-
     /**
      * Initialize all of the action fields to empty strings.
-     */
-    initializeActionFields: function initializeActionFields() {
+     */initializeActionFields: function initializeActionFields() {
       lodash_each__WEBPACK_IMPORTED_MODULE_0___default()(this.allActions, function (action) {
         lodash_each__WEBPACK_IMPORTED_MODULE_0___default()(action.fields, function (field) {
           field.fill = function () {
@@ -3951,14 +3786,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         });
       });
     },
-
     /**
      * Execute the selected action.
-     */
-    executeAction: function executeAction() {
+     */executeAction: function executeAction() {
       var _this$selectedAction$,
-          _this = this;
-
+        _this = this;
       this.working = true;
       Nova.$progress.start();
       var responseType = (_this$selectedAction$ = this.selectedAction.responseType) !== null && _this$selectedAction$ !== void 0 ? _this$selectedAction$ : 'json';
@@ -3977,14 +3809,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   _this.confirmActionModalOpened = false;
                   _context.next = 3;
                   return _this.fetchPolicies();
-
                 case 3:
                   _this.handleActionResponse(response.data, response.headers);
-
                   _this.working = false;
                   Nova.$progress.done();
                   _this.$refs.selectControl.selectedIndex = 0;
-
                 case 7:
                 case "end":
                   return _context.stop();
@@ -3992,14 +3821,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             }
           }, _callee);
         }));
-
         return function (_x) {
           return _ref.apply(this, arguments);
         };
       }())["catch"](function (error) {
         _this.working = false;
         Nova.$progress.done();
-
         if (error.response && error.response.status == 422) {
           if (responseType === 'blob') {
             error.response.data.text().then(function (data) {
@@ -4008,18 +3835,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           } else {
             _this.errors = new form_backend_validation__WEBPACK_IMPORTED_MODULE_5__.Errors(error.response.data.errors);
           }
-
           Nova.error(_this.__('There was a problem executing the action.'));
         }
       });
     },
-
     /**
      * Gather the action FormData for the given action.
-     */
-    actionFormData: function actionFormData() {
+     */actionFormData: function actionFormData() {
       var _this2 = this;
-
       return lodash_tap__WEBPACK_IMPORTED_MODULE_4___default()(new FormData(), function (formData) {
         formData.append('resources', _this2.selectedResources);
         lodash_each__WEBPACK_IMPORTED_MODULE_0___default()(_this2.selectedAction.fields, function (field) {
@@ -4030,39 +3853,31 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     emitResponseCallback: function emitResponseCallback(callback) {
       this.$emit('actionExecuted');
       Nova.$emit('action-executed');
-
       if (typeof callback === 'function') {
         callback();
       }
     },
-
     /**
      * Handle the action response. Typically either a message, download or a redirect.
-     */
-    handleActionResponse: function handleActionResponse(data, headers) {
+     */handleActionResponse: function handleActionResponse(data, headers) {
       var _this3 = this;
-
       var contentDisposition = headers['content-disposition'];
-
       if (data instanceof Blob && lodash_isNil__WEBPACK_IMPORTED_MODULE_3___default()(contentDisposition) && data.type === 'application/json') {
         data.text().then(function (jsonStringData) {
           _this3.handleActionResponse(JSON.parse(jsonStringData), headers);
         });
         return;
       }
-
       if (data instanceof Blob) {
         this.emitResponseCallback(function () {
           var fileName = 'unknown';
           var url = window.URL.createObjectURL(new Blob([data]));
           var link = document.createElement('a');
           link.href = url;
-
           if (contentDisposition) {
             var fileNameMatch = contentDisposition.match(/filename="(.+)"/);
             if (fileNameMatch.length === 2) fileName = fileNameMatch[1];
           }
-
           link.setAttribute('download', fileName);
           document.body.appendChild(link);
           link.click();
@@ -4104,17 +3919,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         });
       } else {
         var message = data.message || this.__('The action was executed successfully.');
-
         this.emitResponseCallback(function () {
           Nova.success(message);
         });
       }
     },
-
     /**
      * Handle an Action button click
-     */
-    handleActionClick: function handleActionClick(uriKey) {
+     */handleActionClick: function handleActionClick(uriKey) {
       this.selectedActionKey = uriKey;
       this.determineActionStrategy();
     }
@@ -4122,8 +3934,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: {
     /**
      * Get the query string for an action request.
-     */
-    actionRequestQueryString: function actionRequestQueryString() {
+     */actionRequestQueryString: function actionRequestQueryString() {
       return {
         action: this.selectedActionKey,
         pivotAction: this.selectedActionIsPivotAction,
@@ -4135,85 +3946,64 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         viaRelationship: this.viaRelationship
       };
     },
-
     /**
      * Get all of the available actions.
-     */
-    allActions: function allActions() {
+     */allActions: function allActions() {
       if (!this.pivotActions) {
         return this.actions;
       }
-
       return this.actions.concat(this.pivotActions.actions);
     },
-
     /**
      * Return the selected action being executed.
-     */
-    selectedAction: function selectedAction() {
+     */selectedAction: function selectedAction() {
       var _this4 = this;
-
       if (this.selectedActionKey) {
         return lodash_find__WEBPACK_IMPORTED_MODULE_2___default()(this.allActions, function (a) {
           return a.uriKey == _this4.selectedActionKey;
         });
       }
     },
-
     /**
      * Determine if the selected action is a pivot action.
-     */
-    selectedActionIsPivotAction: function selectedActionIsPivotAction() {
+     */selectedActionIsPivotAction: function selectedActionIsPivotAction() {
       var _this5 = this;
-
       return this.hasPivotActions && Boolean(lodash_find__WEBPACK_IMPORTED_MODULE_2___default()(this.pivotActions.actions, function (a) {
         return a === _this5.selectedAction;
       }));
     },
-
     /**
      * Get all of the available actions for the resource.
-     */
-    availableActions: function availableActions() {
+     */availableActions: function availableActions() {
       var _this6 = this;
-
       return lodash_filter__WEBPACK_IMPORTED_MODULE_1___default()(this.actions, function (action) {
         return _this6.selectedResources.length > 0 && !action.standalone;
       });
     },
-
     /**
      * Get all of the available actions for the resource.
-     */
-    availableStandaloneActions: function availableStandaloneActions() {
+     */availableStandaloneActions: function availableStandaloneActions() {
       return lodash_filter__WEBPACK_IMPORTED_MODULE_1___default()(this.actions, function (action) {
         return action.standalone;
       });
     },
-
     /**
      * Get all of the available pivot actions for the resource.
-     */
-    availablePivotActions: function availablePivotActions() {
+     */availablePivotActions: function availablePivotActions() {
       var _this7 = this;
-
       if (!this.pivotActions) {
         return [];
       }
-
       return lodash_filter__WEBPACK_IMPORTED_MODULE_1___default()(this.pivotActions.actions, function (action) {
         if (_this7.selectedResources.length == 0) {
           return action.standalone;
         }
-
         return true;
       });
     },
-
     /**
      * Determine whether there are any pivot actions
-     */
-    hasPivotActions: function hasPivotActions() {
+     */hasPivotActions: function hasPivotActions() {
       return this.availablePivotActions.length > 0;
     }
   }
@@ -4248,8 +4038,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     /**
      * Handle all response error.
-     */
-    handleResponseError: function handleResponseError(error) {
+     */handleResponseError: function handleResponseError(error) {
       if (error.response === undefined || error.response.status == 500) {
         Nova.error(this.__('There was a problem submitting the form.'));
       } else if (error.response.status == 422) {
@@ -4259,23 +4048,70 @@ __webpack_require__.r(__webpack_exports__);
         Nova.error(this.__('There was a problem submitting the form.') + ' "' + error.response.statusText + '"');
       }
     },
-
     /**
      * Handle creating response error.
-     */
-    handleOnCreateResponseError: function handleOnCreateResponseError(error) {
+     */handleOnCreateResponseError: function handleOnCreateResponseError(error) {
       this.handleResponseError(error);
     },
-
     /**
      * Handle updating response error.
-     */
-    handleOnUpdateResponseError: function handleOnUpdateResponseError(error) {
+     */handleOnUpdateResponseError: function handleOnUpdateResponseError(error) {
       if (error.response && error.response.status == 409) {
         Nova.error(this.__('Another user has updated this resource since this page was loaded. Please refresh the page and try again.'));
       } else {
         this.handleResponseError(error);
       }
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/mixins/HandlesPanelVisibility.js":
+/*!*******************************************************!*\
+  !*** ./resources/js/mixins/HandlesPanelVisibility.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var lodash_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash/each */ "./node_modules/lodash/each.js");
+/* harmony import */ var lodash_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_each__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var lodash_filter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash/filter */ "./node_modules/lodash/filter.js");
+/* harmony import */ var lodash_filter__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_filter__WEBPACK_IMPORTED_MODULE_1__);
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  emits: ['field-shown', 'field-hidden'],
+  data: function data() {
+    return {
+      visibleFieldsForPanel: {}
+    };
+  },
+  created: function created() {
+    var _this = this;
+    lodash_each__WEBPACK_IMPORTED_MODULE_0___default()(this.panel.fields, function (field) {
+      _this.visibleFieldsForPanel[field.attribute] = field.visible;
+    });
+  },
+  methods: {
+    handleFieldShown: function handleFieldShown(field) {
+      this.visibleFieldsForPanel[field] = true;
+      this.$emit('field-shown', field);
+    },
+    handleFieldHidden: function handleFieldHidden(field) {
+      this.visibleFieldsForPanel[field] = false;
+      this.$emit('field-hidden', field);
+    }
+  },
+  computed: {
+    visibleFieldsCount: function visibleFieldsCount() {
+      return Object.entries(lodash_filter__WEBPACK_IMPORTED_MODULE_1___default()(this.visibleFieldsForPanel, function (visible) {
+        return visible === true;
+      })).length;
     }
   }
 });
@@ -4303,20 +4139,16 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     /**
      * Handle file upload finishing
-     */
-    handleFileUploadFinished: function handleFileUploadFinished() {
+     */handleFileUploadFinished: function handleFileUploadFinished() {
       this.fileUploadsCount--;
-
       if (this.fileUploadsCount < 1) {
         this.fileUploadsCount = 0;
         this.isWorking = false;
       }
     },
-
     /**
      * Handle file upload starting
-     */
-    handleFileUploadStarted: function handleFileUploadStarted() {
+     */handleFileUploadStarted: function handleFileUploadStarted() {
       this.isWorking = true;
       this.fileUploadsCount++;
     }
@@ -4398,52 +4230,39 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     /**
      * Determine whether there are any standalone actions.
-     */
-    haveStandaloneActions: function haveStandaloneActions() {
+     */haveStandaloneActions: function haveStandaloneActions() {
       return lodash_filter__WEBPACK_IMPORTED_MODULE_0___default()(this.allActions, function (a) {
         return a.standalone == true;
       }).length > 0;
     },
-
     /**
      * Return the available actions.
-     */
-    availableActions: function availableActions() {
+     */availableActions: function availableActions() {
       return this.actions;
     },
-
     /**
      * Determine if the resource has any pivot actions available.
-     */
-    hasPivotActions: function hasPivotActions() {
+     */hasPivotActions: function hasPivotActions() {
       return this.pivotActions && this.pivotActions.actions.length > 0;
     },
-
     /**
      * Get the name of the pivot model for the resource.
-     */
-    pivotName: function pivotName() {
+     */pivotName: function pivotName() {
       return this.pivotActions ? this.pivotActions.name : '';
     },
-
     /**
      * Determine if the resource has any actions available.
-     */
-    actionsAreAvailable: function actionsAreAvailable() {
+     */actionsAreAvailable: function actionsAreAvailable() {
       return this.allActions.length > 0;
     },
-
     /**
      * Get all of the actions available to the resource.
-     */
-    allActions: function allActions() {
+     */allActions: function allActions() {
       return this.hasPivotActions ? this.actions.concat(this.pivotActions.actions) : this.actions;
     },
-
     /**
      * Get the selected resources for the action selector.
-     */
-    selectedResourcesForActionSelector: function selectedResourcesForActionSelector() {
+     */selectedResourcesForActionSelector: function selectedResourcesForActionSelector() {
       return this.selectAllMatchingChecked ? 'all' : this.selectedResourceIds;
     }
   }
@@ -4465,13 +4284,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash_filter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash/filter */ "./node_modules/lodash/filter.js");
 /* harmony import */ var lodash_filter__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_filter__WEBPACK_IMPORTED_MODULE_0__);
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return generator._invoke = function (innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; }(innerFn, self, context), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; this._invoke = function (method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); }; } function maybeInvokeDelegate(delegate, context) { var method = delegate.iterator[context.method]; if (undefined === method) { if (context.delegate = null, "throw" === context.method) { if (delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method)) return ContinueSentinel; context.method = "throw", context.arg = new TypeError("The iterator does not provide a 'throw' method"); } return ContinueSentinel; } var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) { if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; } return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, define(Gp, "constructor", GeneratorFunctionPrototype), define(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (object) { var keys = []; for (var key in object) { keys.push(key); } return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) { "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); } }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
-
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -4485,11 +4300,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       cards: []
     };
   },
-
   /**
    * Fetch all of the metrics panels for this view
-   */
-  created: function created() {
+   */created: function created() {
     this.fetchCards();
   },
   watch: {
@@ -4500,10 +4313,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   methods: {
     fetchCards: function fetchCards() {
       var _this = this;
-
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var _yield$Nova$request$g, cards;
-
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -4512,17 +4323,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _context.next = 6;
                   break;
                 }
-
                 _context.next = 3;
                 return Nova.request().get(_this.cardsEndpoint, {
                   params: _this.extraCardParams
                 });
-
               case 3:
                 _yield$Nova$request$g = _context.sent;
                 cards = _yield$Nova$request$g.data;
                 _this.cards = cards;
-
               case 6:
               case "end":
                 return _context.stop();
@@ -4535,24 +4343,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   computed: {
     /**
      * Determine whether we have cards to show on the Dashboard.
-     */
-    shouldShowCards: function shouldShowCards() {
+     */shouldShowCards: function shouldShowCards() {
       return this.cards.length > 0;
     },
-
     /**
      * Determine if the cards array contains some detail-only cards.
-     */
-    hasDetailOnlyCards: function hasDetailOnlyCards() {
+     */hasDetailOnlyCards: function hasDetailOnlyCards() {
       return lodash_filter__WEBPACK_IMPORTED_MODULE_0___default()(this.cards, function (c) {
         return c.onlyOnDetail == true;
       }).length > 0;
     },
-
     /**
      * Get the extra card params to pass to the endpoint.
-     */
-    extraCardParams: function extraCardParams() {
+     */extraCardParams: function extraCardParams() {
       return null;
     }
   }
@@ -4582,19 +4385,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue */ "vue");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_5__);
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return generator._invoke = function (innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; }(innerFn, self, context), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; this._invoke = function (method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); }; } function maybeInvokeDelegate(delegate, context) { var method = delegate.iterator[context.method]; if (undefined === method) { if (context.delegate = null, "throw" === context.method) { if (delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method)) return ContinueSentinel; context.method = "throw", context.arg = new TypeError("The iterator does not provide a 'throw' method"); } return ContinueSentinel; } var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) { if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; } return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, define(Gp, "constructor", GeneratorFunctionPrototype), define(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (object) { var keys = []; for (var key in object) { keys.push(key); } return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) { "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); } }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
-
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -4614,7 +4410,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   }),
   provide: function provide() {
     var _this = this;
-
     return {
       selectAllChecked: (0,vue__WEBPACK_IMPORTED_MODULE_5__.computed)(function () {
         return _this.selectAllChecked;
@@ -4653,7 +4448,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   created: function created() {
     var _this2 = this;
-
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
@@ -4663,51 +4457,36 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 _context.next = 2;
                 break;
               }
-
               return _context.abrupt("return", Nova.visit('/404'));
-
             case 2:
               _this2.initializeSearchFromQueryString();
-
               _this2.initializePerPageFromQueryString();
-
               _this2.initializeTrashedFromQueryString();
-
               _this2.initializeOrderingFromQueryString();
-
               _context.next = 8;
               return _this2.initializeFilters(_this2.lens || null);
-
             case 8:
               _context.next = 10;
               return _this2.getResources();
-
             case 10:
               if (_this2.isLensView) {
                 _context.next = 13;
                 break;
               }
-
               _context.next = 13;
               return _this2.getAuthorizationToRelate();
-
             case 13:
               _this2.getActions();
-
               _this2.initialLoading = false;
-
               _this2.$watch(function () {
                 return _this2.lens + _this2.resourceName + _this2.encodedFilters + _this2.currentSearch + _this2.currentPage + _this2.currentPerPage + _this2.currentOrderBy + _this2.currentOrderByDirection + _this2.currentTrashed;
               }, function () {
                 if (_this2.canceller !== null) _this2.canceller();
-
                 if (_this2.currentPage === 1) {
                   _this2.currentPageLoadMore = null;
                 }
-
                 _this2.getResources();
               });
-
             case 16:
             case "end":
               return _context.stop();
@@ -4722,16 +4501,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: {
     /**
      * Handle resources loaded event.
-     */
-    handleResourcesLoaded: function handleResourcesLoaded() {
+     */handleResourcesLoaded: function handleResourcesLoaded() {
       this.loading = false;
-
       if (!this.isLensView && this.resourceResponse.total !== null) {
         this.allMatchingResourceCount = this.resourceResponse.total;
       } else {
         this.getAllMatchingResourceCount();
       }
-
       Nova.$emit('resources-loaded', this.isLensView ? {
         resourceName: this.resourceName,
         lens: this.lens,
@@ -4742,158 +4518,116 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
       this.initializePolling();
     },
-
     /**
      * Select all of the available resources
-     */
-    selectAllResources: function selectAllResources() {
+     */selectAllResources: function selectAllResources() {
       this.selectedResources = this.resources.slice(0);
     },
-
     /**
      * Toggle the selection of all resources
-     */
-    toggleSelectAll: function toggleSelectAll() {
+     */toggleSelectAll: function toggleSelectAll() {
       if (this.selectAllChecked) {
         this.clearResourceSelections();
       } else {
         this.selectAllResources();
       }
-
       this.getActions();
     },
-
     /**
      * Toggle the selection of all matching resources in the database
-     */
-    toggleSelectAllMatching: function toggleSelectAllMatching() {
+     */toggleSelectAllMatching: function toggleSelectAllMatching() {
       if (!this.selectAllMatchingResources) {
         this.selectAllResources();
         this.selectAllMatchingResources = true;
       } else {
         this.selectAllMatchingResources = false;
       }
-
       this.getActions();
     },
-
     /*
      * Update the resource selection status
-     */
-    updateSelectionStatus: function updateSelectionStatus(resource) {
+     */updateSelectionStatus: function updateSelectionStatus(resource) {
       if (!lodash_includes__WEBPACK_IMPORTED_MODULE_1___default()(this.selectedResources, resource)) {
         this.selectedResources.push(resource);
       } else {
         var index = this.selectedResources.indexOf(resource);
         if (index > -1) this.selectedResources.splice(index, 1);
       }
-
       this.selectAllMatchingResources = false;
       this.getActions();
     },
-
     /**
      * Clear the selected resouces and the "select all" states.
-     */
-    clearResourceSelections: function clearResourceSelections() {
+     */clearResourceSelections: function clearResourceSelections() {
       this.selectAllMatchingResources = false;
       this.selectedResources = [];
     },
-
     /**
      * Sort the resources by the given field.
-     */
-    orderByField: function orderByField(field) {
+     */orderByField: function orderByField(field) {
       var _this$updateQueryStri;
-
       var direction = this.currentOrderByDirection == 'asc' ? 'desc' : 'asc';
-
       if (this.currentOrderBy != field.sortableUriKey) {
         direction = 'asc';
       }
-
       this.updateQueryString((_this$updateQueryStri = {}, _defineProperty(_this$updateQueryStri, this.orderByParameter, field.sortableUriKey), _defineProperty(_this$updateQueryStri, this.orderByDirectionParameter, direction), _this$updateQueryStri));
     },
-
     /**
      * Reset the order by to its default state
-     */
-    resetOrderBy: function resetOrderBy(field) {
+     */resetOrderBy: function resetOrderBy(field) {
       var _this$updateQueryStri2;
-
       this.updateQueryString((_this$updateQueryStri2 = {}, _defineProperty(_this$updateQueryStri2, this.orderByParameter, field.sortableUriKey), _defineProperty(_this$updateQueryStri2, this.orderByDirectionParameter, null), _this$updateQueryStri2));
     },
-
     /**
      * Sync the current search value from the query string.
-     */
-    initializeSearchFromQueryString: function initializeSearchFromQueryString() {
+     */initializeSearchFromQueryString: function initializeSearchFromQueryString() {
       this.search = this.currentSearch;
     },
-
     /**
      * Sync the current order by values from the query string.
-     */
-    initializeOrderingFromQueryString: function initializeOrderingFromQueryString() {
+     */initializeOrderingFromQueryString: function initializeOrderingFromQueryString() {
       this.orderBy = this.currentOrderBy;
       this.orderByDirection = this.currentOrderByDirection;
     },
-
     /**
      * Sync the trashed state values from the query string.
-     */
-    initializeTrashedFromQueryString: function initializeTrashedFromQueryString() {
+     */initializeTrashedFromQueryString: function initializeTrashedFromQueryString() {
       this.trashed = this.currentTrashed;
     },
-
     /**
      * Update the trashed constraint for the resource listing.
-     */
-    trashedChanged: function trashedChanged(trashedStatus) {
+     */trashedChanged: function trashedChanged(trashedStatus) {
       this.trashed = trashedStatus;
       this.updateQueryString(_defineProperty({}, this.trashedParameter, this.trashed));
     },
-
     /**
      * Update the per page parameter in the query string
-     */
-    updatePerPageChanged: function updatePerPageChanged(perPage) {
+     */updatePerPageChanged: function updatePerPageChanged(perPage) {
       this.perPage = perPage;
       this.perPageChanged();
     },
-
     /**
      * Select the next page.
-     */
-    selectPage: function selectPage(page) {
+     */selectPage: function selectPage(page) {
       this.updateQueryString(_defineProperty({}, this.pageParameter, page));
     },
-
     /**
      * Sync the per page values from the query string.
-     */
-    initializePerPageFromQueryString: function initializePerPageFromQueryString() {
+     */initializePerPageFromQueryString: function initializePerPageFromQueryString() {
       var _this$resourceInforma;
-
       this.perPage = this.route.params[this.perPageParameter] || this.initialPerPage || ((_this$resourceInforma = this.resourceInformation) === null || _this$resourceInforma === void 0 ? void 0 : _this$resourceInforma.perPageOptions[0]) || null;
     },
-
     /**
      * Close the delete modal.
-     */
-    closeDeleteModal: function closeDeleteModal() {
+     */closeDeleteModal: function closeDeleteModal() {
       this.deleteModalOpen = false;
     },
-
     /**
      * Execute a search against the resource.
-     */
-    performSearch: function performSearch() {
+     */performSearch: function performSearch() {
       var _this3 = this;
-
       this.debouncer(function () {
         var _this3$updateQueryStr;
-
         _this3.updateQueryString((_this3$updateQueryStr = {}, _defineProperty(_this3$updateQueryStr, _this3.pageParameter, 1), _defineProperty(_this3$updateQueryStr, _this3.searchParameter, _this3.search), _this3$updateQueryStr));
       });
     }
@@ -4901,295 +4635,219 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: {
     /**
      * Determine if the resource has any filters
-     */
-    hasFilters: function hasFilters() {
+     */hasFilters: function hasFilters() {
       return this.$store.getters["".concat(this.resourceName, "/hasFilters")];
     },
-
     /**
      * Get the name of the page query string variable.
-     */
-    pageParameter: function pageParameter() {
+     */pageParameter: function pageParameter() {
       return this.viaRelationship ? this.viaRelationship + '_page' : this.resourceName + '_page';
     },
-
     /**
      * Determine if all resources are selected on the page.
-     */
-    selectAllChecked: function selectAllChecked() {
+     */selectAllChecked: function selectAllChecked() {
       return this.selectedResources.length == this.resources.length;
     },
-
     /**
      * Determine if Select All Dropdown state is indeterminate.
-     */
-    selectAllIndeterminate: function selectAllIndeterminate() {
+     */selectAllIndeterminate: function selectAllIndeterminate() {
       return Boolean(this.selectAllChecked || this.selectAllMatchingChecked) && Boolean(!this.selectAllAndSelectAllMatchingChecked);
     },
     selectAllAndSelectAllMatchingChecked: function selectAllAndSelectAllMatchingChecked() {
       return this.selectAllChecked && this.selectAllMatchingChecked;
     },
-
     /**
      * Determine if all matching resources are selected.
-     */
-    selectAllMatchingChecked: function selectAllMatchingChecked() {
+     */selectAllMatchingChecked: function selectAllMatchingChecked() {
       return this.selectAllMatchingResources;
     },
-
     /**
      * Get the IDs for the selected resources.
-     */
-    selectedResourceIds: function selectedResourceIds() {
+     */selectedResourceIds: function selectedResourceIds() {
       return lodash_map__WEBPACK_IMPORTED_MODULE_2___default()(this.selectedResources, function (resource) {
         return resource.id.value;
       });
     },
-
     /**
      * Get the current search value from the query string.
-     */
-    currentSearch: function currentSearch() {
+     */currentSearch: function currentSearch() {
       return this.route.params[this.searchParameter] || '';
     },
-
     /**
      * Get the current order by value from the query string.
-     */
-    currentOrderBy: function currentOrderBy() {
+     */currentOrderBy: function currentOrderBy() {
       return this.route.params[this.orderByParameter] || '';
     },
-
     /**
      * Get the current order by direction from the query string.
-     */
-    currentOrderByDirection: function currentOrderByDirection() {
+     */currentOrderByDirection: function currentOrderByDirection() {
       return this.route.params[this.orderByDirectionParameter] || null;
     },
-
     /**
      * Get the current trashed constraint value from the query string.
-     */
-    currentTrashed: function currentTrashed() {
+     */currentTrashed: function currentTrashed() {
       return this.route.params[this.trashedParameter] || '';
     },
-
     /**
      * Determine if the current resource listing is via a many-to-many relationship.
-     */
-    viaManyToMany: function viaManyToMany() {
+     */viaManyToMany: function viaManyToMany() {
       return this.relationshipType == 'belongsToMany' || this.relationshipType == 'morphToMany';
     },
-
     /**
      * Determine if the resource / relationship is "full".
-     */
-    resourceIsFull: function resourceIsFull() {
+     */resourceIsFull: function resourceIsFull() {
       return Boolean(this.viaHasOne) && this.resources.length > 0 || Boolean(this.viaHasOneThrough && this.resources.length > 0);
     },
-
     /**
      * Determine if the current resource listing is via a has-one relationship.
-     */
-    viaHasOne: function viaHasOne() {
+     */viaHasOne: function viaHasOne() {
       return this.relationshipType == 'hasOne' || this.relationshipType == 'morphOne';
     },
-
     /**
      * Determine if the resource is shown via a HasOneThrough relationship.
-     */
-    viaHasOneThrough: function viaHasOneThrough() {
+     */viaHasOneThrough: function viaHasOneThrough() {
       return this.relationshipType == 'hasOneThrough';
     },
-
     /**
      * Determine if the index is a relation field
-     */
-    isRelation: function isRelation() {
+     */isRelation: function isRelation() {
       return Boolean(this.viaResourceId && this.viaRelationship);
     },
-
     /**
      * Get the singular name for the resource
-     */
-    singularName: function singularName() {
+     */singularName: function singularName() {
       if (this.isRelation && this.field) {
         return (0,_util__WEBPACK_IMPORTED_MODULE_4__.capitalize)(this.field.singularLabel);
       }
-
       if (this.resourceInformation) {
         return (0,_util__WEBPACK_IMPORTED_MODULE_4__.capitalize)(this.resourceInformation.singularLabel);
       }
     },
-
     /**
      * Determine if there are any resources for the view
-     */
-    hasResources: function hasResources() {
+     */hasResources: function hasResources() {
       return Boolean(this.resources.length > 0);
     },
-
     /**
      * Determine if there any lenses for this resource
-     */
-    hasLenses: function hasLenses() {
+     */hasLenses: function hasLenses() {
       return Boolean(this.lenses.length > 0);
     },
-
     /**
      * Determine if the resource should show any cards
-     */
-    shouldShowCards: function shouldShowCards() {
+     */shouldShowCards: function shouldShowCards() {
       // Don't show cards if this resource is beings shown via a relations
       return Boolean(this.cards.length > 0 && !this.isRelation);
     },
-
     /**
      * Determine whether to show the selection checkboxes for resources
-     */
-    shouldShowCheckBoxes: function shouldShowCheckBoxes() {
+     */shouldShowCheckBoxes: function shouldShowCheckBoxes() {
       return Boolean(this.hasResources && !this.viaHasOne) && Boolean(this.resourceHasActions || this.authorizedToDeleteAnyResources || this.canShowDeleteMenu);
     },
-
     /**
      * Determine whether the delete menu should be shown to the user
-     */
-    shouldShowDeleteMenu: function shouldShowDeleteMenu() {
+     */shouldShowDeleteMenu: function shouldShowDeleteMenu() {
       return Boolean(this.selectedResources.length > 0) && this.canShowDeleteMenu;
     },
-
     /**
      * Determine if any selected resources may be deleted.
-     */
-    authorizedToDeleteSelectedResources: function authorizedToDeleteSelectedResources() {
+     */authorizedToDeleteSelectedResources: function authorizedToDeleteSelectedResources() {
       return Boolean(lodash_find__WEBPACK_IMPORTED_MODULE_0___default()(this.selectedResources, function (resource) {
         return resource.authorizedToDelete;
       }));
     },
-
     /**
      * Determine if any selected resources may be force deleted.
-     */
-    authorizedToForceDeleteSelectedResources: function authorizedToForceDeleteSelectedResources() {
+     */authorizedToForceDeleteSelectedResources: function authorizedToForceDeleteSelectedResources() {
       return Boolean(lodash_find__WEBPACK_IMPORTED_MODULE_0___default()(this.selectedResources, function (resource) {
         return resource.authorizedToForceDelete;
       }));
     },
-
     /**
      * Determine if the user is authorized to delete any listed resource.
-     */
-    authorizedToDeleteAnyResources: function authorizedToDeleteAnyResources() {
+     */authorizedToDeleteAnyResources: function authorizedToDeleteAnyResources() {
       return this.resources.length > 0 && Boolean(lodash_find__WEBPACK_IMPORTED_MODULE_0___default()(this.resources, function (resource) {
         return resource.authorizedToDelete;
       }));
     },
-
     /**
      * Determine if the user is authorized to force delete any listed resource.
-     */
-    authorizedToForceDeleteAnyResources: function authorizedToForceDeleteAnyResources() {
+     */authorizedToForceDeleteAnyResources: function authorizedToForceDeleteAnyResources() {
       return this.resources.length > 0 && Boolean(lodash_find__WEBPACK_IMPORTED_MODULE_0___default()(this.resources, function (resource) {
         return resource.authorizedToForceDelete;
       }));
     },
-
     /**
      * Determine if any selected resources may be restored.
-     */
-    authorizedToRestoreSelectedResources: function authorizedToRestoreSelectedResources() {
+     */authorizedToRestoreSelectedResources: function authorizedToRestoreSelectedResources() {
       return Boolean(lodash_find__WEBPACK_IMPORTED_MODULE_0___default()(this.selectedResources, function (resource) {
         return resource.authorizedToRestore;
       }));
     },
-
     /**
      * Determine if the user is authorized to restore any listed resource.
-     */
-    authorizedToRestoreAnyResources: function authorizedToRestoreAnyResources() {
+     */authorizedToRestoreAnyResources: function authorizedToRestoreAnyResources() {
       return this.resources.length > 0 && Boolean(lodash_find__WEBPACK_IMPORTED_MODULE_0___default()(this.resources, function (resource) {
         return resource.authorizedToRestore;
       }));
     },
-
     /**
      * Return the currently encoded filter string from the store
-     */
-    encodedFilters: function encodedFilters() {
+     */encodedFilters: function encodedFilters() {
       return this.$store.getters["".concat(this.resourceName, "/currentEncodedFilters")];
     },
-
     /**
      * Return the initial encoded filters from the query string
-     */
-    initialEncodedFilters: function initialEncodedFilters() {
+     */initialEncodedFilters: function initialEncodedFilters() {
       return this.route.params[this.filterParameter] || '';
     },
-
     /**
      * Return the pagination component for the resource.
-     */
-    paginationComponent: function paginationComponent() {
+     */paginationComponent: function paginationComponent() {
       return "pagination-".concat(Nova.config('pagination') || 'links');
     },
-
     /**
      * Determine if the resources has a next page.
-     */
-    hasNextPage: function hasNextPage() {
+     */hasNextPage: function hasNextPage() {
       return Boolean(this.resourceResponse && this.resourceResponse.next_page_url);
     },
-
     /**
      * Determine if the resources has a previous page.
-     */
-    hasPreviousPage: function hasPreviousPage() {
+     */hasPreviousPage: function hasPreviousPage() {
       return Boolean(this.resourceResponse && this.resourceResponse.prev_page_url);
     },
-
     /**
      * Return the total pages for the resource.
-     */
-    totalPages: function totalPages() {
+     */totalPages: function totalPages() {
       return Math.ceil(this.allMatchingResourceCount / this.currentPerPage);
     },
-
     /**
      * Return the resource count label
-     */
-    resourceCountLabel: function resourceCountLabel() {
+     */resourceCountLabel: function resourceCountLabel() {
       var first = this.perPage * (this.currentPage - 1);
       return this.resources.length && "".concat(Nova.formatNumber(first + 1), "-").concat(Nova.formatNumber(first + this.resources.length), " ").concat(this.__('of'), " ").concat(Nova.formatNumber(this.allMatchingResourceCount));
     },
-
     /**
      * Get the current per page value from the query string.
-     */
-    currentPerPage: function currentPerPage() {
+     */currentPerPage: function currentPerPage() {
       return this.perPage;
     },
-
     /**
      * The per-page options configured for this resource.
-     */
-    perPageOptions: function perPageOptions() {
+     */perPageOptions: function perPageOptions() {
       if (this.resourceResponse) {
         return this.resourceResponse.per_page_options;
       }
     },
-
     /**
      * Get the default label for the create button
-     */
-    createButtonLabel: function createButtonLabel() {
+     */createButtonLabel: function createButtonLabel() {
       if (this.resourceInformation) return this.resourceInformation.createButtonLabel;
       return this.__('Create');
     },
-
     /**
      * Build the resource request query string.
-     */
-    resourceRequestQueryString: function resourceRequestQueryString() {
+     */resourceRequestQueryString: function resourceRequestQueryString() {
       var queryString = {
         search: this.currentSearch,
         filters: this.encodedFilters,
@@ -5204,74 +4862,54 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         viaResourceRelationship: this.viaResourceRelationship,
         relationshipType: this.relationshipType
       };
-
       if (!this.lensName) {
         queryString['viaRelationship'] = this.viaRelationship;
       }
-
       return queryString;
     },
-
     /**
      * Determine if the action selector should be shown.
-     */
-    shouldShowActionSelector: function shouldShowActionSelector() {
+     */shouldShowActionSelector: function shouldShowActionSelector() {
       return this.selectedResources.length > 0 || this.haveStandaloneActions;
     },
-
     /**
      * Determine if the view is a resource index or a lens.
-     */
-    isLensView: function isLensView() {
+     */isLensView: function isLensView() {
       return this.lens !== '' && this.lens != undefined && this.lens != null;
     },
-
     /**
      * Determine whether the pagination component should be shown.
-     */
-    shouldShowPagination: function shouldShowPagination() {
+     */shouldShowPagination: function shouldShowPagination() {
       return this.disablePagination !== true && this.resourceResponse && this.hasResources;
     },
-
     /**
      * Return the current count of all resources
-     */
-    currentResourceCount: function currentResourceCount() {
+     */currentResourceCount: function currentResourceCount() {
       return this.resources.length;
     },
-
     /**
      * Get the name of the search query string variable.
-     */
-    searchParameter: function searchParameter() {
+     */searchParameter: function searchParameter() {
       return this.viaRelationship ? this.viaRelationship + '_search' : this.resourceName + '_search';
     },
-
     /**
      * Get the name of the order by query string variable.
-     */
-    orderByParameter: function orderByParameter() {
+     */orderByParameter: function orderByParameter() {
       return this.viaRelationship ? this.viaRelationship + '_order' : this.resourceName + '_order';
     },
-
     /**
      * Get the name of the order by direction query string variable.
-     */
-    orderByDirectionParameter: function orderByDirectionParameter() {
+     */orderByDirectionParameter: function orderByDirectionParameter() {
       return this.viaRelationship ? this.viaRelationship + '_direction' : this.resourceName + '_direction';
     },
-
     /**
      * Get the name of the trashed constraint query string variable.
-     */
-    trashedParameter: function trashedParameter() {
+     */trashedParameter: function trashedParameter() {
       return this.viaRelationship ? this.viaRelationship + '_trashed' : this.resourceName + '_trashed';
     },
-
     /**
      * Get the name of the per page query string variable.
-     */
-    perPageParameter: function perPageParameter() {
+     */perPageParameter: function perPageParameter() {
       return this.viaRelationship ? this.viaRelationship + '_per_page' : this.resourceName + '_per_page';
     }
   }
@@ -5296,15 +4934,12 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     /**
      * Get the user's local timezone.
-     */
-    userTimezone: function userTimezone() {
+     */userTimezone: function userTimezone() {
       return Nova.config('userTimezone') || Nova.config('timezone');
     },
-
     /**
      * Determine if the user is used to 12 hour time.
-     */
-    usesTwelveHourTime: function usesTwelveHourTime() {
+     */usesTwelveHourTime: function usesTwelveHourTime() {
       var locale = new Intl.DateTimeFormat().resolvedOptions().locale;
       return (0,_util__WEBPACK_IMPORTED_MODULE_0__.hourCycle)(locale) === 12;
     }
@@ -5334,23 +4969,19 @@ var compiledSearchParams = null;
   methods: {
     /**
      * Update the given query string values.
-     */
-    updateQueryString: function updateQueryString(value) {
+     */updateQueryString: function updateQueryString(value) {
       var searchParams = new URLSearchParams(window.location.search);
       var page = _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia.page;
       lodash_forEach__WEBPACK_IMPORTED_MODULE_0___default()(value, function (v, i) {
         searchParams.set(i, v || '');
       });
-
       if (compiledSearchParams !== searchParams.toString()) {
         if (page.url !== "".concat(window.location.pathname, "?").concat(searchParams)) {
           page.url = "".concat(window.location.pathname, "?").concat(searchParams);
           window.history.pushState(page, '', "".concat(window.location.pathname, "?").concat(searchParams));
         }
-
         compiledSearchParams = searchParams.toString();
       }
-
       Nova.$emit('query-string-changed', searchParams);
     }
   }
@@ -5376,40 +5007,30 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     /**
      * Get the resource information object for the current resource.
-     */
-    resourceInformation: function resourceInformation() {
+     */resourceInformation: function resourceInformation() {
       var _this = this;
-
       return lodash_find__WEBPACK_IMPORTED_MODULE_0___default()(Nova.config('resources'), function (resource) {
         return resource.uriKey == _this.resourceName;
       });
     },
-
     /**
      * Get the resource information object for the current resource.
-     */
-    viaResourceInformation: function viaResourceInformation() {
+     */viaResourceInformation: function viaResourceInformation() {
       var _this2 = this;
-
       if (!this.viaResource) {
         return;
       }
-
       return lodash_find__WEBPACK_IMPORTED_MODULE_0___default()(Nova.config('resources'), function (resource) {
         return resource.uriKey == _this2.viaResource;
       });
     },
-
     /**
      * Determine if the user is authorized to create the current resource.
-     */
-    authorizedToCreate: function authorizedToCreate() {
+     */authorizedToCreate: function authorizedToCreate() {
       var _this$resourceInforma;
-
       if (['hasOneThrough', 'hasManyThrough'].indexOf(this.relationshipType) >= 0) {
         return false;
       }
-
       return ((_this$resourceInforma = this.resourceInformation) === null || _this$resourceInforma === void 0 ? void 0 : _this$resourceInforma.authorizedToCreate) || false;
     }
   }
@@ -5447,30 +5068,27 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   "useLocalization": () => (/* binding */ useLocalization)
 /* harmony export */ });
 /* harmony import */ var lodash_forEach__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash/forEach */ "./node_modules/lodash/forEach.js");
 /* harmony import */ var lodash_forEach__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_forEach__WEBPACK_IMPORTED_MODULE_0__);
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+var mixin = {
   methods: {
     /**
      * Translate the given key.
-     */
-    __: function __(key, replace) {
+     */__: function __(key, replace) {
       var translation = Nova.config('translations')[key] ? Nova.config('translations')[key] : key;
       lodash_forEach__WEBPACK_IMPORTED_MODULE_0___default()(replace, function (value, key) {
         key = new String(key);
-
         if (value === null) {
           console.error("Translation '".concat(translation, "' for key '").concat(key, "' contains a null replacement."));
           return;
         }
-
         value = new String(value);
         var searches = [':' + key, ':' + key.toUpperCase(), ':' + key.charAt(0).toUpperCase() + key.slice(1)];
         var replacements = [value, value.toUpperCase(), value.charAt(0).toUpperCase() + value.slice(1)];
-
         for (var i = searches.length - 1; i >= 0; i--) {
           translation = translation.replace(searches[i], replacements[i]);
         }
@@ -5478,7 +5096,15 @@ __webpack_require__.r(__webpack_exports__);
       return translation;
     }
   }
-});
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (mixin);
+function useLocalization() {
+  return {
+    __: function __(key, replace) {
+      return mixin.methods.__(key, replace);
+    }
+  };
+}
 
 /***/ }),
 
@@ -5498,7 +5124,6 @@ __webpack_require__.r(__webpack_exports__);
     Nova.$on('metric-refresh', this.fetch);
     Nova.$on('resources-deleted', this.fetch);
     Nova.$on('resources-restored', this.fetch);
-
     if (this.card.refreshWhenActionRuns) {
       Nova.$on('action-executed', this.fetch);
     }
@@ -5525,28 +5150,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   methods: {
     /**
      * Select the previous page.
-     */
-    selectPreviousPage: function selectPreviousPage() {
+     */selectPreviousPage: function selectPreviousPage() {
       this.updateQueryString(_defineProperty({}, this.pageParameter, this.currentPage - 1));
     },
-
     /**
      * Select the next page.
-     */
-    selectNextPage: function selectNextPage() {
+     */selectNextPage: function selectNextPage() {
       this.updateQueryString(_defineProperty({}, this.pageParameter, this.currentPage + 1));
     }
   },
   computed: {
     /**
      * Get the current page from the query string.
-     */
-    currentPage: function currentPage() {
+     */currentPage: function currentPage() {
       return parseInt(this.route.params[this.pageParameter] || 1);
     }
   }
@@ -5566,7 +5186,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -5576,23 +5195,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: {
     /**
      * Sync the per page values from the query string.
-     */
-    initializePerPageFromQueryString: function initializePerPageFromQueryString() {
+     */initializePerPageFromQueryString: function initializePerPageFromQueryString() {
       this.perPage = this.currentPerPage;
     },
-
     /**
      * Update the desired amount of resources per page.
-     */
-    perPageChanged: function perPageChanged() {
+     */perPageChanged: function perPageChanged() {
       this.updateQueryString(_defineProperty({}, this.perPageParameter, this.perPage));
     }
   },
   computed: {
     /**
      * Get the current per page value from the query string.
-     */
-    currentPerPage: function currentPerPage() {
+     */currentPerPage: function currentPerPage() {
       return this.route.params[this.perPageParameter] || 25;
     }
   }
@@ -5625,10 +5240,8 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     /**
      * Set the currently selected resource
-     */
-    selectResource: function selectResource(resource) {
+     */selectResource: function selectResource(resource) {
       this.selectedResource = resource;
-
       if (this.field) {
         if (typeof this['emitFieldValueChange'] == 'function') {
           this.emitFieldValueChange(this.field.attribute, this.selectedResource.value);
@@ -5637,21 +5250,16 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
     },
-
     /**
      * Handle the search box being cleared.
-     */
-    handleSearchCleared: function handleSearchCleared() {
+     */handleSearchCleared: function handleSearchCleared() {
       this.availableResources = [];
     },
-
     /**
      * Clear the selected resource and availableResources
-     */
-    clearSelection: function clearSelection() {
+     */clearSelection: function clearSelection() {
       this.selectedResource = '';
       this.availableResources = [];
-
       if (this.field) {
         if (typeof this['emitFieldValueChange'] == 'function') {
           this.emitFieldValueChange(this.field.attribute, null);
@@ -5660,27 +5268,22 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
     },
-
     /**
      * Perform a search to get the relatable resources.
-     */
-    performSearch: function performSearch(search) {
+     */performSearch: function performSearch(search) {
       var _this = this;
-
       this.search = search;
-      var trimmedSearch = search.trim(); // If the user performs an empty search, it will load all the results
+      var trimmedSearch = search.trim();
+      // If the user performs an empty search, it will load all the results
       // so let's just set the availableResources to an empty array to avoid
       // loading a huge result set
-
       if (trimmedSearch == '') {
         return;
       }
-
       this.searchDebouncer(function () {
         _this.getAvailableResources(trimmedSearch);
       }, 500);
     },
-
     /**
      * Debounce function for the search handler
      */
@@ -5706,33 +5309,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
 /* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   created: function created() {
     var _this = this;
-
     this.removeOnNavigationChangesEvent = _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__.Inertia.on('before', function (event) {
       _this.removeOnNavigationChangesEvent();
-
       _this.handlePreventFormAbandonmentOnInertia(event);
     });
     window.addEventListener('beforeunload', this.handlePreventFormAbandonmentOnInertia);
-
     this.removeOnBeforeUnloadEvent = function () {
       window.removeEventListener('beforeunload', _this.handlePreventFormAbandonmentOnInertia);
-
       _this.removeOnBeforeUnloadEvent = function () {};
     };
   },
   mounted: function mounted() {
     var _this2 = this;
-
     window.onpopstate = function (event) {
       _this2.handlePreventFormAbandonmentOnPopState(event);
     };
@@ -5753,12 +5348,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)(['allowLeavingForm', 'preventLeavingForm', 'triggerPushState', 'resetPushState'])), {}, {
     /**
      * Prevent accidental abandonment only if form was changed.
-     */
-    updateFormStatus: function updateFormStatus() {
+     */updateFormStatus: function updateFormStatus() {
       if (this.canLeaveForm == true) {
         this.triggerPushState();
       }
-
       this.preventLeavingForm();
     },
     handlePreventFormAbandonment: function handlePreventFormAbandonment(proceed, revert) {
@@ -5766,22 +5359,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         proceed();
         return;
       }
-
       var answer = window.confirm(this.__('Do you really want to leave? You have unsaved changes.'));
-
       if (answer) {
         proceed();
         return;
       }
-
       revert();
     },
     handlePreventFormAbandonmentOnInertia: function handlePreventFormAbandonmentOnInertia(event) {
       var _this3 = this;
-
       this.handlePreventFormAbandonment(function () {
         _this3.handleProceedingToNextPage();
-
         _this3.allowLeavingForm();
       }, function () {
         _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__.Inertia.ignoreHistoryState = true;
@@ -5789,19 +5377,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         event.returnValue = '';
         _this3.removeOnNavigationChangesEvent = _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__.Inertia.on('before', function (event) {
           _this3.removeOnNavigationChangesEvent();
-
           _this3.handlePreventFormAbandonmentOnInertia(event);
         });
       });
     },
     handlePreventFormAbandonmentOnPopState: function handlePreventFormAbandonmentOnPopState(event) {
       var _this4 = this;
-
       event.stopImmediatePropagation();
       event.stopPropagation();
       this.handlePreventFormAbandonment(function () {
         _this4.handleProceedingToPreviousPage();
-
         _this4.allowLeavingForm();
       }, function () {
         _this4.triggerPushState();
@@ -5811,7 +5396,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       window.onpopstate = null;
       _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__.Inertia.ignoreHistoryState = false;
       this.removeOnBeforeUnloadEvent();
-
       if (!this.canLeaveFormToPreviousPage) {
         window.history.back();
       }
@@ -5840,11 +5424,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -5856,8 +5437,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)(['allowLeavingModal', 'preventLeavingModal'])), {}, {
     /**
      * Prevent accidental abandonment only if form was changed.
-     */
-    updateModalStatus: function updateModalStatus() {
+     */updateModalStatus: function updateModalStatus() {
       this.preventLeavingModal();
     },
     handlePreventModalAbandonment: function handlePreventModalAbandonment(proceed, revert) {
@@ -5865,15 +5445,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         proceed();
         return;
       }
-
       var answer = window.confirm(this.__('Do you really want to leave? You have unsaved changes.'));
-
       if (answer) {
         this.allowLeavingModal();
         proceed();
         return;
       }
-
       revert();
     }
   }),
@@ -5894,13 +5471,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return generator._invoke = function (innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; }(innerFn, self, context), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; this._invoke = function (method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); }; } function maybeInvokeDelegate(delegate, context) { var method = delegate.iterator[context.method]; if (undefined === method) { if (context.delegate = null, "throw" === context.method) { if (delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method)) return ContinueSentinel; context.method = "throw", context.arg = new TypeError("The iterator does not provide a 'throw' method"); } return ContinueSentinel; } var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) { if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; } return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, define(Gp, "constructor", GeneratorFunctionPrototype), define(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (object) { var keys = []; for (var key in object) { keys.push(key); } return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) { "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); } }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
-
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     var searchParams = new URLSearchParams(window.location.search);
@@ -5912,14 +5485,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   created: function created() {
     var _this = this;
-
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               Nova.$on('query-string-changed', _this.listenToQueryStringChanges);
-
             case 1:
             case "end":
               return _context.stop();
@@ -5958,40 +5529,31 @@ __webpack_require__.r(__webpack_exports__);
       currentlyPolling: false
     };
   },
-
   /**
    * Unbind the polling listener before the component is destroyed.
-   */
-  beforeUnmount: function beforeUnmount() {
+   */beforeUnmount: function beforeUnmount() {
     this.stopPolling();
   },
   methods: {
     initializePolling: function initializePolling() {
       this.currentlyPolling = this.currentlyPolling || this.resourceResponse.polling;
-
       if (this.currentlyPolling && this.pollingListener === null) {
         return this.startPolling();
       }
     },
-
     /**
      * Pause polling for new resources.
-     */
-    stopPolling: function stopPolling() {
+     */stopPolling: function stopPolling() {
       if (this.pollingListener) {
         clearInterval(this.pollingListener);
         this.pollingListener = null;
       }
-
       this.currentlyPolling = false;
     },
-
     /**
      * Start polling for new resources.
-     */
-    startPolling: function startPolling() {
+     */startPolling: function startPolling() {
       var _this = this;
-
       this.pollingListener = setInterval(function () {
         if (document.hasFocus() && document.querySelectorAll('[data-modal-open]').length < 1) {
           _this.getResources();
@@ -5999,11 +5561,9 @@ __webpack_require__.r(__webpack_exports__);
       }, this.pollingInterval);
       this.currentlyPolling = true;
     },
-
     /**
      * Restart polling for the resource.
-     */
-    restartPolling: function restartPolling() {
+     */restartPolling: function restartPolling() {
       if (this.currentlyPolling === true) {
         this.stopPolling();
         this.startPolling();
@@ -6017,11 +5577,9 @@ __webpack_require__.r(__webpack_exports__);
     pollingInterval: function pollingInterval() {
       return this.resourceResponse.pollingInterval;
     },
-
     /**
      * Determine if the polling toggle button should be shown.
-     */
-    shouldShowPollingToggle: function shouldShowPollingToggle() {
+     */shouldShowPollingToggle: function shouldShowPollingToggle() {
       if (!this.resourceResponse) return false;
       return this.resourceResponse.showPollingToggle || false;
     }
@@ -6050,22 +5608,17 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     /**
      * Toggle the trashed state of the search
-     */
-    toggleWithTrashed: function toggleWithTrashed() {
+     */toggleWithTrashed: function toggleWithTrashed() {
       this.withTrashed = !this.withTrashed;
     },
-
     /**
      * Enable searching for trashed resources
-     */
-    enableWithTrashed: function enableWithTrashed() {
+     */enableWithTrashed: function enableWithTrashed() {
       this.withTrashed = true;
     },
-
     /**
      * Disable searching for trashed resources
-     */
-    disableWithTrashed: function disableWithTrashed() {
+     */disableWithTrashed: function disableWithTrashed() {
       this.withTrashed = false;
     }
   }
@@ -6087,30 +5640,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "CopiesToClipboard": () => (/* reexport safe */ _CopiesToClipboard__WEBPACK_IMPORTED_MODULE_2__["default"]),
 /* harmony export */   "Deletable": () => (/* reexport safe */ _Deletable__WEBPACK_IMPORTED_MODULE_5__["default"]),
 /* harmony export */   "DependentFormField": () => (/* reexport safe */ _DependentFormField__WEBPACK_IMPORTED_MODULE_6__["default"]),
-/* harmony export */   "Errors": () => (/* reexport safe */ form_backend_validation__WEBPACK_IMPORTED_MODULE_30__.Errors),
-/* harmony export */   "Filterable": () => (/* reexport safe */ _Filterable__WEBPACK_IMPORTED_MODULE_24__["default"]),
+/* harmony export */   "Errors": () => (/* reexport safe */ form_backend_validation__WEBPACK_IMPORTED_MODULE_33__.Errors),
+/* harmony export */   "FieldSuggestions": () => (/* reexport safe */ _FieldSuggestions__WEBPACK_IMPORTED_MODULE_24__["default"]),
+/* harmony export */   "FieldValue": () => (/* reexport safe */ _FieldValue__WEBPACK_IMPORTED_MODULE_25__["default"]),
+/* harmony export */   "Filterable": () => (/* reexport safe */ _Filterable__WEBPACK_IMPORTED_MODULE_26__["default"]),
 /* harmony export */   "FormEvents": () => (/* reexport safe */ _FormEvents__WEBPACK_IMPORTED_MODULE_17__["default"]),
 /* harmony export */   "FormField": () => (/* reexport safe */ _FormField__WEBPACK_IMPORTED_MODULE_18__["default"]),
 /* harmony export */   "HandlesActions": () => (/* reexport safe */ _HandlesActions__WEBPACK_IMPORTED_MODULE_7__["default"]),
 /* harmony export */   "HandlesFormRequest": () => (/* reexport safe */ _HandlesFormRequest__WEBPACK_IMPORTED_MODULE_8__["default"]),
+/* harmony export */   "HandlesPanelVisibility": () => (/* reexport safe */ _HandlesPanelVisibility__WEBPACK_IMPORTED_MODULE_27__["default"]),
 /* harmony export */   "HandlesUploads": () => (/* reexport safe */ _HandlesUploads__WEBPACK_IMPORTED_MODULE_9__["default"]),
 /* harmony export */   "HandlesValidationErrors": () => (/* reexport safe */ _HandlesValidationErrors__WEBPACK_IMPORTED_MODULE_19__["default"]),
 /* harmony export */   "HasActions": () => (/* reexport safe */ _HasActions__WEBPACK_IMPORTED_MODULE_10__["default"]),
 /* harmony export */   "HasCards": () => (/* reexport safe */ _HasCards__WEBPACK_IMPORTED_MODULE_23__["default"]),
-/* harmony export */   "IndexConcerns": () => (/* reexport safe */ _IndexConcerns__WEBPACK_IMPORTED_MODULE_29__["default"]),
+/* harmony export */   "IndexConcerns": () => (/* reexport safe */ _IndexConcerns__WEBPACK_IMPORTED_MODULE_32__["default"]),
 /* harmony export */   "InteractsWithDates": () => (/* reexport safe */ _InteractsWithDates__WEBPACK_IMPORTED_MODULE_11__["default"]),
 /* harmony export */   "InteractsWithQueryString": () => (/* reexport safe */ _InteractsWithQueryString__WEBPACK_IMPORTED_MODULE_12__["default"]),
 /* harmony export */   "InteractsWithResourceInformation": () => (/* reexport safe */ _InteractsWithResourceInformation__WEBPACK_IMPORTED_MODULE_13__["default"]),
 /* harmony export */   "LoadsResources": () => (/* reexport safe */ _LoadsResources__WEBPACK_IMPORTED_MODULE_20__["default"]),
 /* harmony export */   "Localization": () => (/* reexport safe */ _Localization__WEBPACK_IMPORTED_MODULE_14__["default"]),
 /* harmony export */   "MetricBehavior": () => (/* reexport safe */ _MetricBehavior__WEBPACK_IMPORTED_MODULE_16__["default"]),
-/* harmony export */   "Paginatable": () => (/* reexport safe */ _Paginatable__WEBPACK_IMPORTED_MODULE_25__["default"]),
-/* harmony export */   "PerPageable": () => (/* reexport safe */ _PerPageable__WEBPACK_IMPORTED_MODULE_26__["default"]),
+/* harmony export */   "Paginatable": () => (/* reexport safe */ _Paginatable__WEBPACK_IMPORTED_MODULE_28__["default"]),
+/* harmony export */   "PerPageable": () => (/* reexport safe */ _PerPageable__WEBPACK_IMPORTED_MODULE_29__["default"]),
 /* harmony export */   "PerformsSearches": () => (/* reexport safe */ _PerformsSearches__WEBPACK_IMPORTED_MODULE_22__["default"]),
 /* harmony export */   "PreventsFormAbandonment": () => (/* reexport safe */ _PreventsFormAbandonment__WEBPACK_IMPORTED_MODULE_3__["default"]),
 /* harmony export */   "PreventsModalAbandonment": () => (/* reexport safe */ _PreventsModalAbandonment__WEBPACK_IMPORTED_MODULE_4__["default"]),
-/* harmony export */   "RouteParameters": () => (/* reexport safe */ _RouteParameters__WEBPACK_IMPORTED_MODULE_27__["default"]),
-/* harmony export */   "SupportsPolling": () => (/* reexport safe */ _SupportsPolling__WEBPACK_IMPORTED_MODULE_28__["default"]),
+/* harmony export */   "RouteParameters": () => (/* reexport safe */ _RouteParameters__WEBPACK_IMPORTED_MODULE_30__["default"]),
+/* harmony export */   "SupportsPolling": () => (/* reexport safe */ _SupportsPolling__WEBPACK_IMPORTED_MODULE_31__["default"]),
 /* harmony export */   "TogglesTrashed": () => (/* reexport safe */ _TogglesTrashed__WEBPACK_IMPORTED_MODULE_21__["default"]),
 /* harmony export */   "mapProps": () => (/* reexport safe */ _propTypes__WEBPACK_IMPORTED_MODULE_0__.mapProps)
 /* harmony export */ });
@@ -6138,13 +5694,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _TogglesTrashed__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./TogglesTrashed */ "./resources/js/mixins/TogglesTrashed.js");
 /* harmony import */ var _PerformsSearches__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./PerformsSearches */ "./resources/js/mixins/PerformsSearches.js");
 /* harmony import */ var _HasCards__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./HasCards */ "./resources/js/mixins/HasCards.js");
-/* harmony import */ var _Filterable__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./Filterable */ "./resources/js/mixins/Filterable.js");
-/* harmony import */ var _Paginatable__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./Paginatable */ "./resources/js/mixins/Paginatable.js");
-/* harmony import */ var _PerPageable__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./PerPageable */ "./resources/js/mixins/PerPageable.js");
-/* harmony import */ var _RouteParameters__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./RouteParameters */ "./resources/js/mixins/RouteParameters.js");
-/* harmony import */ var _SupportsPolling__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./SupportsPolling */ "./resources/js/mixins/SupportsPolling.js");
-/* harmony import */ var _IndexConcerns__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./IndexConcerns */ "./resources/js/mixins/IndexConcerns.js");
-/* harmony import */ var form_backend_validation__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! form-backend-validation */ "./node_modules/form-backend-validation/dist/index.js");
+/* harmony import */ var _FieldSuggestions__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./FieldSuggestions */ "./resources/js/mixins/FieldSuggestions.js");
+/* harmony import */ var _FieldValue__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./FieldValue */ "./resources/js/mixins/FieldValue.js");
+/* harmony import */ var _Filterable__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./Filterable */ "./resources/js/mixins/Filterable.js");
+/* harmony import */ var _HandlesPanelVisibility__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./HandlesPanelVisibility */ "./resources/js/mixins/HandlesPanelVisibility.js");
+/* harmony import */ var _Paginatable__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./Paginatable */ "./resources/js/mixins/Paginatable.js");
+/* harmony import */ var _PerPageable__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./PerPageable */ "./resources/js/mixins/PerPageable.js");
+/* harmony import */ var _RouteParameters__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./RouteParameters */ "./resources/js/mixins/RouteParameters.js");
+/* harmony import */ var _SupportsPolling__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./SupportsPolling */ "./resources/js/mixins/SupportsPolling.js");
+/* harmony import */ var _IndexConcerns__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./IndexConcerns */ "./resources/js/mixins/IndexConcerns.js");
+/* harmony import */ var form_backend_validation__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! form-backend-validation */ "./node_modules/form-backend-validation/dist/index.js");
+
+
+
 
 
 
@@ -6252,6 +5814,13 @@ var propTypes = {
     validator: function validator(val) {
       return ['edit', 'select', 'ignore', 'detail'].includes(val);
     }
+  },
+  mode: {
+    type: String,
+    "default": 'form',
+    validator: function validator(v) {
+      return ['form', 'modal'].includes(v);
+    }
   }
 };
 function mapProps(attributes) {
@@ -6280,6 +5849,26 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/util/filled.js":
+/*!*************************************!*\
+  !*** ./resources/js/util/filled.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ filled)
+/* harmony export */ });
+/* harmony import */ var lodash_isNil__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash/isNil */ "./node_modules/lodash/isNil.js");
+/* harmony import */ var lodash_isNil__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_isNil__WEBPACK_IMPORTED_MODULE_0__);
+
+function filled(value) {
+  return !lodash_isNil__WEBPACK_IMPORTED_MODULE_0___default()(value) && value !== '';
+}
+
+/***/ }),
+
 /***/ "./resources/js/util/hourCycle.js":
 /*!****************************************!*\
   !*** ./resources/js/util/hourCycle.js ***!
@@ -6295,11 +5884,9 @@ __webpack_require__.r(__webpack_exports__);
   var hourCycle = Intl.DateTimeFormat(locale, {
     hour: 'numeric'
   }).resolvedOptions().hourCycle;
-
   if (hourCycle == 'h23' || hourCycle == 'h24') {
     return 24;
   }
-
   return 12;
 }
 
@@ -6350,7 +5937,9 @@ __webpack_require__.r(__webpack_exports__);
   })]).then(function (result) {
     return result[0];
   });
-} // Usage
+}
+
+// Usage
 // minimum(axios.get('/'))
 //     .then(response => console.log('done'))
 //     .catch(error => console.log(error))
@@ -7768,7 +7357,7 @@ module.exports = function GetIntrinsic(name, allowMissing) {
 		throw new $TypeError('"allowMissing" argument must be a boolean');
 	}
 
-	if ($exec(/^%?[^%]*%?$/g, name) === null) {
+	if ($exec(/^%?[^%]*%?$/, name) === null) {
 		throw new $SyntaxError('`%` may not be present anywhere but at the beginning and end of the intrinsic name');
 	}
 	var parts = stringToPath(name);
@@ -14581,6 +14170,56 @@ module.exports = memoize;
 
 /***/ }),
 
+/***/ "./node_modules/lodash/negate.js":
+/*!***************************************!*\
+  !*** ./node_modules/lodash/negate.js ***!
+  \***************************************/
+/***/ ((module) => {
+
+/** Error message constants. */
+var FUNC_ERROR_TEXT = 'Expected a function';
+
+/**
+ * Creates a function that negates the result of the predicate `func`. The
+ * `func` predicate is invoked with the `this` binding and arguments of the
+ * created function.
+ *
+ * @static
+ * @memberOf _
+ * @since 3.0.0
+ * @category Function
+ * @param {Function} predicate The predicate to negate.
+ * @returns {Function} Returns the new negated function.
+ * @example
+ *
+ * function isEven(n) {
+ *   return n % 2 == 0;
+ * }
+ *
+ * _.filter([1, 2, 3, 4, 5, 6], _.negate(isEven));
+ * // => [1, 3, 5]
+ */
+function negate(predicate) {
+  if (typeof predicate != 'function') {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  return function() {
+    var args = arguments;
+    switch (args.length) {
+      case 0: return !predicate.call(this);
+      case 1: return !predicate.call(this, args[0]);
+      case 2: return !predicate.call(this, args[0], args[1]);
+      case 3: return !predicate.call(this, args[0], args[1], args[2]);
+    }
+    return !predicate.apply(this, args);
+  };
+}
+
+module.exports = negate;
+
+
+/***/ }),
+
 /***/ "./node_modules/lodash/now.js":
 /*!************************************!*\
   !*** ./node_modules/lodash/now.js ***!
@@ -14610,6 +14249,45 @@ var now = function() {
 };
 
 module.exports = now;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/omitBy.js":
+/*!***************************************!*\
+  !*** ./node_modules/lodash/omitBy.js ***!
+  \***************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseIteratee = __webpack_require__(/*! ./_baseIteratee */ "./node_modules/lodash/_baseIteratee.js"),
+    negate = __webpack_require__(/*! ./negate */ "./node_modules/lodash/negate.js"),
+    pickBy = __webpack_require__(/*! ./pickBy */ "./node_modules/lodash/pickBy.js");
+
+/**
+ * The opposite of `_.pickBy`; this method creates an object composed of
+ * the own and inherited enumerable string keyed properties of `object` that
+ * `predicate` doesn't return truthy for. The predicate is invoked with two
+ * arguments: (value, key).
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Object
+ * @param {Object} object The source object.
+ * @param {Function} [predicate=_.identity] The function invoked per property.
+ * @returns {Object} Returns the new object.
+ * @example
+ *
+ * var object = { 'a': 1, 'b': '2', 'c': 3 };
+ *
+ * _.omitBy(object, _.isNumber);
+ * // => { 'b': '2' }
+ */
+function omitBy(object, predicate) {
+  return pickBy(object, negate(baseIteratee(predicate)));
+}
+
+module.exports = omitBy;
 
 
 /***/ }),
@@ -16953,13 +16631,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _ActionButtonSelector_vue_vue_type_template_id_2b6ff672__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ActionButtonSelector.vue?vue&type=template&id=2b6ff672 */ "./resources/js/components/ActionButtonSelector.vue?vue&type=template&id=2b6ff672");
 /* harmony import */ var _ActionButtonSelector_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ActionButtonSelector.vue?vue&type=script&lang=js */ "./resources/js/components/ActionButtonSelector.vue?vue&type=script&lang=js");
-/* harmony import */ var C_laragon_www_hr_nova_nova_components_ActionButtonSelector_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_laragon_www_totp_app_nova_components_NovaActionButtonSelectors_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_laragon_www_hr_nova_nova_components_ActionButtonSelector_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_ActionButtonSelector_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_ActionButtonSelector_vue_vue_type_template_id_2b6ff672__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/ActionButtonSelector.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_laragon_www_totp_app_nova_components_NovaActionButtonSelectors_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_ActionButtonSelector_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_ActionButtonSelector_vue_vue_type_template_id_2b6ff672__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/ActionButtonSelector.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -17025,8 +16703,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _vue_devtools_api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @vue/devtools-api */ "./node_modules/@vue/devtools-api/lib/esm/index.js");
 /*!
- * vuex v4.0.2
- * (c) 2021 Evan You
+ * vuex v4.1.0
+ * (c) 2022 Evan You
  * @license MIT
  */
 
@@ -17143,6 +16821,7 @@ function resetStore (store, hot) {
 
 function resetStoreState (store, state, hot) {
   var oldState = store._state;
+  var oldScope = store._scope;
 
   // bind store public getters
   store.getters = {};
@@ -17150,22 +16829,33 @@ function resetStoreState (store, state, hot) {
   store._makeLocalGettersCache = Object.create(null);
   var wrappedGetters = store._wrappedGetters;
   var computedObj = {};
-  forEachValue(wrappedGetters, function (fn, key) {
-    // use computed to leverage its lazy-caching mechanism
-    // direct inline function use will lead to closure preserving oldState.
-    // using partial to return function with only arguments preserved in closure environment.
-    computedObj[key] = partial(fn, store);
-    Object.defineProperty(store.getters, key, {
-      // TODO: use `computed` when it's possible. at the moment we can't due to
-      // https://github.com/vuejs/vuex/pull/1883
-      get: function () { return computedObj[key](); },
-      enumerable: true // for local getters
+  var computedCache = {};
+
+  // create a new effect scope and create computed object inside it to avoid
+  // getters (computed) getting destroyed on component unmount.
+  var scope = (0,vue__WEBPACK_IMPORTED_MODULE_0__.effectScope)(true);
+
+  scope.run(function () {
+    forEachValue(wrappedGetters, function (fn, key) {
+      // use computed to leverage its lazy-caching mechanism
+      // direct inline function use will lead to closure preserving oldState.
+      // using partial to return function with only arguments preserved in closure environment.
+      computedObj[key] = partial(fn, store);
+      computedCache[key] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () { return computedObj[key](); });
+      Object.defineProperty(store.getters, key, {
+        get: function () { return computedCache[key].value; },
+        enumerable: true // for local getters
+      });
     });
   });
 
   store._state = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
     data: state
   });
+
+  // register the newly created effect scope to the store so that we can
+  // dispose the effects when this method runs again in the future.
+  store._scope = scope;
 
   // enable strict mode for new state
   if (store.strict) {
@@ -17180,6 +16870,11 @@ function resetStoreState (store, state, hot) {
         oldState.data = null;
       });
     }
+  }
+
+  // dispose previously registered effect scope if there is one.
+  if (oldScope) {
+    oldScope.stop();
   }
 }
 
@@ -17929,6 +17624,12 @@ var Store = function Store (options) {
   this._modulesNamespaceMap = Object.create(null);
   this._subscribers = [];
   this._makeLocalGettersCache = Object.create(null);
+
+  // EffectScope instance. when registering new getters, we wrap them inside
+  // EffectScope so that getters (computed) would not be destroyed on
+  // component unmount.
+  this._scope = null;
+
   this._devtools = devtools;
 
   // bind commit and dispatch to self
@@ -18471,7 +18172,7 @@ function pad (num, maxLength) {
 }
 
 var index = {
-  version: '4.0.2',
+  version: '4.1.0',
   Store: Store,
   storeKey: storeKey,
   createStore: createStore,

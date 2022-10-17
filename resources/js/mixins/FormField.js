@@ -14,6 +14,7 @@ export default {
       'viaRelationship',
       'resourceName',
       'showHelpText',
+      'mode',
     ]),
     formUniqueId: {
       type: String,
