@@ -1,27 +1,25 @@
 <template>
-
-  <div>
-    <div
+    <div v-if="shouldShowDropdown" class="flex">
+         <div
             v-if="actions.length > 0"
             :dusk="`${resource.id.value}-inline-actions`"
             class="flex gap-4 py-1"
         >
-        <!-- User Actions -->
-        <button
-        as="button"
-        v-for="action in actions"
-        :key="action.uriKey"
-        :dusk="`${resource.id.value}-inline-action-${action.uriKey}`"
-        @click.stop="() => handleActionClick(action.uriKey)"
-        :title="action.name"
-        :destructive="action.destructive"
-        class="items-center justify-center px-3 text-sm font-bold text-white rounded shadow cursor-pointer bg-primary-500 hover:bg-primary-400 dark:text-gray-900 focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 h-9"
-        >
-        {{ action.name }}
-        </button>
-    </div>
-
-    <div v-if="shouldShowDropdown">
+            <!-- User Actions -->
+            <button
+            as="button"
+            v-for="action in actions"
+            :key="action.uriKey"
+            :dusk="`${resource.id.value}-inline-action-${action.uriKey}`"
+            @click.stop="() => handleActionClick(action.uriKey)"
+            :title="action.name"
+            :destructive="action.destructive"
+            class="items-center justify-center px-3 text-sm font-bold text-white rounded shadow cursor-pointer bg-primary-500 hover:bg-primary-400 dark:text-gray-900 focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 h-9"
+            >
+            {{ action.name }}
+            </button>
+        </div>
+        
         <Dropdown>
         <span class="sr-only">{{ __('Resource Row Dropdown') }}</span>
         <DropdownTrigger
@@ -112,7 +110,6 @@
         :data="actionResponseData"
         />
     </div>
-  </div>
 </template>
 
 <script>
@@ -160,7 +157,7 @@ export default {
     },
 
     shouldShowDropdown() {
-      return this.userHasAnyOptions
+      return this.actions.length > 0 || this.userHasAnyOptions
     },
 
     shouldShowPreviewLink() {

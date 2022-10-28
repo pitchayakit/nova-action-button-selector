@@ -2589,7 +2589,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return '';
     },
     shouldShowDropdown: function shouldShowDropdown() {
-      return this.userHasAnyOptions;
+      return this.actions.length > 0 || this.userHasAnyOptions;
     },
     shouldShowPreviewLink: function shouldShowPreviewLink() {
       return this.resource.authorizedToView && this.resource.previewHasFields;
@@ -2826,11 +2826,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "vue");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 
-var _hoisted_1 = ["dusk"];
-var _hoisted_2 = ["dusk", "onClick", "title", "destructive"];
-var _hoisted_3 = {
-  key: 1
+var _hoisted_1 = {
+  key: 0,
+  "class": "flex"
 };
+var _hoisted_2 = ["dusk"];
+var _hoisted_3 = ["dusk", "onClick", "title", "destructive"];
 var _hoisted_4 = {
   "class": "sr-only"
 };
@@ -2848,7 +2849,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_ScrollWrap = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ScrollWrap");
   var _component_DropdownMenu = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("DropdownMenu");
   var _component_Dropdown = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Dropdown");
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [$props.actions.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+  return $options.shouldShowDropdown ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [$props.actions.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
     key: 0,
     dusk: "".concat($props.resource.id.value, "-inline-actions"),
     "class": "flex gap-4 py-1"
@@ -2863,8 +2864,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       title: action.name,
       destructive: action.destructive,
       "class": "items-center justify-center px-3 text-sm font-bold text-white rounded shadow cursor-pointer bg-primary-500 hover:bg-primary-400 dark:text-gray-900 focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 h-9"
-    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(action.name), 9 /* TEXT, PROPS */, _hoisted_2);
-  }), 128 /* KEYED_FRAGMENT */))], 8 /* PROPS */, _hoisted_1)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $options.shouldShowDropdown ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Dropdown, null, {
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(action.name), 9 /* TEXT, PROPS */, _hoisted_3);
+  }), 128 /* KEYED_FRAGMENT */))], 8 /* PROPS */, _hoisted_2)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Dropdown, null, {
     menu: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_DropdownMenu, {
         width: "auto",
@@ -2949,7 +2950,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     _: 1 /* STABLE */
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Action Confirmation Modal "), _ctx.confirmActionModalOpened ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)((0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDynamicComponent)(_ctx.selectedAction.component), {
-    key: 0,
+    key: 1,
     show: _ctx.confirmActionModalOpened,
     working: _ctx.working,
     "selected-resources": $options.selectedResources,
@@ -2960,11 +2961,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onConfirm: _ctx.executeAction,
     onClose: _ctx.closeConfirmationModal
   }, null, 40 /* PROPS, HYDRATE_EVENTS */, ["show", "working", "selected-resources", "resource-name", "action", "endpoint", "errors", "onConfirm", "onClose"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Action Response Modal "), _ctx.selectedAction ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)((0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDynamicComponent)(_ctx.actionResponseData.modal), {
-    key: 1,
+    key: 2,
     onClose: _ctx.closeActionResponseModal,
     show: _ctx.showActionResponseModal,
     data: _ctx.actionResponseData
-  }, null, 40 /* PROPS, HYDRATE_EVENTS */, ["onClose", "show", "data"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
+  }, null, 40 /* PROPS, HYDRATE_EVENTS */, ["onClose", "show", "data"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true);
 }
 
 /***/ }),
