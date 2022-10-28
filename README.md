@@ -11,3 +11,5 @@ composer require lexicon/nova-action-button-selectors
 ```
 
 ![example_1](./docs/main_1.jpg)
+
+![example_2](./docs/main_2.jpg)
