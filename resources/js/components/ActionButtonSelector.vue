@@ -1,20 +1,23 @@
 <template>
   <div v-if="hasDropdownItems" class="flex">
+    
       <div
         v-if="actions.length > 0"
         :dusk="`${resource.id.value}-inline-actions`"
-        class="py-1 flex gap-4"
+        class="flex gap-4 py-1"
         >
+        <template v-for="action in actions">
           <button
-                v-for="action in actions"
+              v-if="!action.showInDropdown"
               :key="action.uriKey"
               :dusk="`${resource.id.value}-inline-action-${action.uriKey}`"
               @click="() => handleActionClick(action.uriKey)"
               :title="action.name"
               :destructive="action.destructive"
-              class="shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded text-sm font-bold focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 inline-flex items-center justify-center h-9 px-3 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900" >
+              class="relative inline-flex items-center justify-center px-3 text-sm font-bold text-white rounded shadow cursor-pointer bg-primary-500 hover:bg-primary-400 dark:text-gray-900 focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 h-9" >
               {{ action.name }}
           </button>
+        </template>
       </div>
 
     <Dropdown>
@@ -80,7 +83,7 @@
               <DropdownMenuItem
                 as="button"
                 v-if="resource.authorizedToRestore && resource.softDeleted"
-                class="block text-sm text-left w-full px-3 py-1 font-semibold text-red-400 hover:text-red-300 focus:text-red-600 focus:outline-none focus:ring ring-inset"
+                class="block w-full px-3 py-1 text-sm font-semibold text-left text-red-400 hover:text-red-300 focus:text-red-600 focus:outline-none focus:ring ring-inset"
                 data-testid="open-restore-modal"
                 dusk="open-restore-modal-button"
                 @click.prevent="openRestoreModal"
@@ -91,7 +94,7 @@
               <DropdownMenuItem
                 as="button"
                 v-if="resource.authorizedToForceDelete"
-                class="block text-sm text-left w-full px-3 py-1 font-semibold text-red-400 hover:text-red-300 focus:text-red-600 focus:outline-none focus:ring ring-inset"
+                class="block w-full px-3 py-1 text-sm font-semibold text-left text-red-400 hover:text-red-300 focus:text-red-600 focus:outline-none focus:ring ring-inset"
                 data-testid="open-force-delete-modal"
                 dusk="open-force-delete-modal-button"
                 @click.prevent="openForceDeleteModal"
@@ -99,6 +102,28 @@
               >
                 {{ __('Force Delete Resource') }}
               </DropdownMenuItem>
+            </div>
+
+            <div
+              v-if="actions.length > 0"
+              :dusk="`${resource.id.value}-inline-actions`"
+              class="py-1"
+            >
+
+              <template v-for="action in actions">
+                <!-- User Actions -->
+                <DropdownMenuItem
+                  as="button"
+                  v-if="action.showInDropdown"
+                  :key="action.uriKey"
+                  :dusk="`${resource.id.value}-inline-action-${action.uriKey}`"
+                  @click="() => handleActionClick(action.uriKey)"
+                  :title="action.name"
+                  :destructive="action.destructive"
+                >
+                  {{ action.name }}
+                </DropdownMenuItem>
+              </template>
             </div>
             
           </ScrollWrap>

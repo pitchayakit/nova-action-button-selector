@@ -2635,6 +2635,7 @@ var _hoisted_5 = {
   key: 0,
   "class": "py-1"
 };
+var _hoisted_6 = ["dusk"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Icon = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Icon");
   var _component_BasicButton = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("BasicButton");
@@ -2648,9 +2649,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return $options.hasDropdownItems ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [$props.actions.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
     key: 0,
     dusk: "".concat($props.resource.id.value, "-inline-actions"),
-    "class": "py-1 flex gap-4"
+    "class": "flex gap-4 py-1"
   }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.actions, function (action) {
-    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [!action.showInDropdown ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
       key: action.uriKey,
       dusk: "".concat($props.resource.id.value, "-inline-action-").concat(action.uriKey),
       onClick: function onClick() {
@@ -2658,9 +2659,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       },
       title: action.name,
       destructive: action.destructive,
-      "class": "shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded text-sm font-bold focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 inline-flex items-center justify-center h-9 px-3 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900"
-    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(action.name), 9 /* TEXT, PROPS */, _hoisted_3);
-  }), 128 /* KEYED_FRAGMENT */))], 8 /* PROPS */, _hoisted_2)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Dropdown, null, {
+      "class": "relative inline-flex items-center justify-center px-3 text-sm font-bold text-white rounded shadow cursor-pointer bg-primary-500 hover:bg-primary-400 dark:text-gray-900 focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 h-9"
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(action.name), 9 /* TEXT, PROPS */, _hoisted_3)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 64 /* STABLE_FRAGMENT */);
+  }), 256 /* UNKEYED_FRAGMENT */))], 8 /* PROPS */, _hoisted_2)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Dropdown, null, {
     menu: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_DropdownMenu, {
         width: "auto",
@@ -2719,7 +2720,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               }, 8 /* PROPS */, ["onClick"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.resource.authorizedToRestore && $props.resource.softDeleted ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_DropdownMenuItem, {
                 key: 3,
                 as: "button",
-                "class": "block text-sm text-left w-full px-3 py-1 font-semibold text-red-400 hover:text-red-300 focus:text-red-600 focus:outline-none focus:ring ring-inset",
+                "class": "block w-full px-3 py-1 text-sm font-semibold text-left text-red-400 hover:text-red-300 focus:text-red-600 focus:outline-none focus:ring ring-inset",
                 "data-testid": "open-restore-modal",
                 dusk: "open-restore-modal-button",
                 onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($options.openRestoreModal, ["prevent"])
@@ -2732,7 +2733,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               }, 8 /* PROPS */, ["onClick"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.resource.authorizedToForceDelete ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_DropdownMenuItem, {
                 key: 4,
                 as: "button",
-                "class": "block text-sm text-left w-full px-3 py-1 font-semibold text-red-400 hover:text-red-300 focus:text-red-600 focus:outline-none focus:ring ring-inset",
+                "class": "block w-full px-3 py-1 text-sm font-semibold text-left text-red-400 hover:text-red-300 focus:text-red-600 focus:outline-none focus:ring ring-inset",
                 "data-testid": "open-force-delete-modal",
                 dusk: "open-force-delete-modal-button",
                 onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($options.openForceDeleteModal, ["prevent"]),
@@ -2743,7 +2744,28 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 }),
 
                 _: 1 /* STABLE */
-              }, 8 /* PROPS */, ["onClick"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
+              }, 8 /* PROPS */, ["onClick"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.actions.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+                key: 1,
+                dusk: "".concat($props.resource.id.value, "-inline-actions"),
+                "class": "py-1"
+              }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.actions, function (action) {
+                return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" User Actions "), action.showInDropdown ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_DropdownMenuItem, {
+                  as: "button",
+                  key: action.uriKey,
+                  dusk: "".concat($props.resource.id.value, "-inline-action-").concat(action.uriKey),
+                  onClick: function onClick() {
+                    return _ctx.handleActionClick(action.uriKey);
+                  },
+                  title: action.name,
+                  destructive: action.destructive
+                }, {
+                  "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                    return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(action.name), 1 /* TEXT */)];
+                  }),
+
+                  _: 2 /* DYNAMIC */
+                }, 1032 /* PROPS, DYNAMIC_SLOTS */, ["dusk", "onClick", "title", "destructive"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 64 /* STABLE_FRAGMENT */);
+              }), 256 /* UNKEYED_FRAGMENT */))], 8 /* PROPS */, _hoisted_6)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
             }),
             _: 1 /* STABLE */
           })];
@@ -2842,6 +2864,7 @@ var _hoisted_6 = {
   key: 0,
   "class": "py-1"
 };
+var _hoisted_7 = ["dusk"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Icon = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Icon");
   var _component_DropdownTrigger = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("DropdownTrigger");
@@ -2854,7 +2877,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     dusk: "".concat($props.resource.id.value, "-inline-actions"),
     "class": "flex gap-4 py-1"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" User Actions "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.actions, function (action) {
-    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [!action.showInDropdown ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
       as: "button",
       key: action.uriKey,
       dusk: "".concat($props.resource.id.value, "-inline-action-").concat(action.uriKey),
@@ -2864,8 +2887,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       title: action.name,
       destructive: action.destructive,
       "class": "items-center justify-center px-3 text-sm font-bold text-white rounded shadow cursor-pointer bg-primary-500 hover:bg-primary-400 dark:text-gray-900 focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 h-9"
-    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(action.name), 9 /* TEXT, PROPS */, _hoisted_3);
-  }), 128 /* KEYED_FRAGMENT */))], 8 /* PROPS */, _hoisted_2)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Dropdown, null, {
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(action.name), 9 /* TEXT, PROPS */, _hoisted_3)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 64 /* STABLE_FRAGMENT */);
+  }), 256 /* UNKEYED_FRAGMENT */))], 8 /* PROPS */, _hoisted_2)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Dropdown, null, {
     menu: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_DropdownMenu, {
         width: "auto",
@@ -2924,7 +2947,28 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 }),
 
                 _: 1 /* STABLE */
-              }, 8 /* PROPS */, ["dusk", "title"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
+              }, 8 /* PROPS */, ["dusk", "title"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.actions.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+                key: 1,
+                dusk: "".concat($props.resource.id.value, "-inline-actions"),
+                "class": "py-1"
+              }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" User Actions "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.actions, function (action) {
+                return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [action.showInDropdown ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_DropdownMenuItem, {
+                  as: "button",
+                  key: action.uriKey,
+                  dusk: "".concat($props.resource.id.value, "-inline-action-").concat(action.uriKey),
+                  onClick: function onClick() {
+                    return _ctx.handleActionClick(action.uriKey);
+                  },
+                  title: action.name,
+                  destructive: action.destructive
+                }, {
+                  "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                    return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(action.name), 1 /* TEXT */)];
+                  }),
+
+                  _: 2 /* DYNAMIC */
+                }, 1032 /* PROPS, DYNAMIC_SLOTS */, ["dusk", "onClick", "title", "destructive"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 64 /* STABLE_FRAGMENT */);
+              }), 256 /* UNKEYED_FRAGMENT */))], 8 /* PROPS */, _hoisted_7)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
             }),
             _: 1 /* STABLE */
           })];
