@@ -2,9 +2,10 @@
 
 namespace Lexicon\ActionButtonSelector;
 
-trait ActionButtons
+trait ActionAsButton
 {
-    public function showInDropdown($show) {
-        return $this->withMeta(['showInDropdown' => true]);
+    public function showInDropdown($show = true) 
+    {
+        return $this->withMeta(['showInDropdown' => $show]);
     }
 }
