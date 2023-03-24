@@ -9,7 +9,7 @@
             <template v-for="action in actions">
               <button
               as="button"
-              v-if="!action.showInDropdown"
+              v-if="action.showAsButton"
               :key="action.uriKey"
               :dusk="`${resource.id.value}-inline-action-${action.uriKey}`"
               @click.stop="() => handleActionClick(action.uriKey)"
@@ -93,7 +93,7 @@
                   <template v-for="action in actions">
                   <DropdownMenuItem
                     as="button"
-                    v-if="action.showInDropdown"
+                    v-if="!action.showAsButton"
                     :key="action.uriKey"
                     :dusk="`${resource.id.value}-inline-action-${action.uriKey}`"
                     @click="() => handleActionClick(action.uriKey)"

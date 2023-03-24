@@ -16,12 +16,6 @@ Index page with [inline action](https://nova.laravel.com/docs/4.0/actions/regist
 ![example_2](./docs/main_2.jpg)
 
 ## Usage
-
-All Nova actions are changed from dropdown to buttons by default.
-
-However, some actions you might need to show as dropdown which is default by Nova.
-
-Add ActionAsButton trait at your Nova action
 ```
 ...
 use Lexicon\ActionButtonSelector\ActionAsButton;
@@ -32,7 +26,7 @@ class NovaAction extends Action
 ...
 ```
 
-Add `showInDropdown()` at your Nova resource
+Add `showAsButton()` at your Nova resource
 ```
 ...
 
@@ -41,7 +35,7 @@ class NovaResource extends Resource {
     public function actions(NovaRequest $request)
     {
         return [
-            Actions\NovaAction::make()->showInDropdown()
+            Actions\NovaAction::make()->showAsButton()
         ];
         ...
     }

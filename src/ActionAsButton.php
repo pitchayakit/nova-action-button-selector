@@ -4,8 +4,8 @@ namespace Lexicon\ActionButtonSelector;
 
 trait ActionAsButton
 {
-    public function showInDropdown($show = true) 
+    public function showAsButton($show = true)
     {
-        return $this->withMeta(['showInDropdown' => $show]);
+        return $this->withMeta(['showAsButton' => $show]);
     }
 }
