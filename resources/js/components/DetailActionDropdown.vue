@@ -20,7 +20,7 @@
         </template>
       </div>
 
-    <Dropdown>
+    <Dropdown v-if="hasDropdownAction()">
       <span class="sr-only">{{ __('Resource Row Dropdown') }}</span>
       <DropdownTrigger
         :dusk="`${resource.id.value}-control-selector`"
@@ -125,7 +125,7 @@
                 </DropdownMenuItem>
               </template>
             </div>
-            
+
           </ScrollWrap>
         </DropdownMenu>
       </template>
@@ -214,6 +214,10 @@ export default {
 
   methods: {
     ...mapActions(['startImpersonating']),
+
+    hasDropdownAction() {
+      return this.actions.filter((action) => action.showInDropdown).length > 0;
+    },
 
     openPreviewModal() {
       this.previewModalOpen = true

@@ -21,8 +21,8 @@
               </button>
             </template>
         </div>
-        
-        <Dropdown>
+
+        <Dropdown v-if="hasDropdownAction()">
         <span class="sr-only">{{ __('Resource Row Dropdown') }}</span>
         <DropdownTrigger
             :dusk="`${resource.id.value}-control-selector`"
@@ -162,7 +162,13 @@ export default {
     actionResponseData: {},
   }),
 
-  methods: mapActions(['startImpersonating']),
+  methods: {
+    ...mapActions(['startImpersonating']),
+
+    hasDropdownAction() {
+      return this.actions.filter((action) => action.showInDropdown).length > 0;
+    }
+  },
 
   computed: {
     ...mapGetters(['currentUser']),
