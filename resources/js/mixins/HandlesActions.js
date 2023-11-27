@@ -93,14 +93,19 @@ export default {
 
       let responseType = this.selectedAction.responseType ?? 'json'
 
+      const formData = this.actionFormData();
+
+      if (this.selectedResources && this.selectedResources.length && typeof this.selectedResources[0] === 'object') {
+        formData.set('resources', this.selectedResources.map(r => r.id.value))
+      }
+
       Nova.request({
         method: 'post',
         url: this.endpoint || `/nova-api/${this.resourceName}/action`,
         params: this.actionRequestQueryString,
-        data: this.actionFormData(),
+        data: formData,
         responseType,
-      })
-        .then(async response => {
+      }).then(async response => {
           this.confirmActionModalOpened = false
           await this.fetchPolicies()
 
