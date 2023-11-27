@@ -138,7 +138,7 @@ export default {
      */
     actionFormData() {
       return tap(new FormData(), formData => {
-        formData.append('resources', this.selectedResources.map(r => r.id.value))
+        formData.append('resources', this.selectedResources);
 
         each(this.selectedAction.fields, field => {
           field.fill(formData)
